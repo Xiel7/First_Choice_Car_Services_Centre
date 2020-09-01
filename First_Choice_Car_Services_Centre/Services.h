@@ -8,5 +8,9 @@ using namespace std;
 class Services{
 private:
 	string transCode;
-
+public:
+	
+	void setTransCode(string);
+	string
+	
 };
