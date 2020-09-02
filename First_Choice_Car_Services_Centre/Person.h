@@ -17,7 +17,7 @@ public:
 	void setFirstName(string fName);
 	string getFirstName();
 	void setLastName(string lName);
-	string getLasttName();
+	string getLastName();
 	void setID(string id);
 	string getID();
 

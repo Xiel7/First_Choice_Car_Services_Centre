@@ -14,3 +14,36 @@ Person::Person(string firstName, string lastName, string id)
 	this->id = id;
 	cout << "Person constructor with para" << endl;
 }
+
+//set get firstName
+void Person::setFirstName(string fName)
+{
+	firstName = fName;
+}
+
+string Person::getFirstName()
+{
+	return firstName;
+}
+
+//set get lastName
+void Person::setLastName(string lName)
+{
+	lastName = lName;
+}
+
+string Person::getLastName()
+{
+	return lastName;
+}
+
+//set get id
+void Person::setID(string id)
+{
+	this->id = id;
+}
+
+string Person::getID()
+{
+	return id;
+}
