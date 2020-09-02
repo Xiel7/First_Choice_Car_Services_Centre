@@ -17,7 +17,12 @@ private:
 
 
 public:
+	Services();
 	
+	void printService();
+
+
+	//set get
 	void setTransCode(string);
 	string getTransCode();
 	

@@ -27,7 +27,7 @@ int main()
 	
 	Technician techkun("Tech", "Kun", "TC1001");
 	Customer bakayarou(nissan, "Baka", "Yarou", "CT0001");
-
+	
 
 	bakayarou.printInfo();
 	techkun.printInfo();
