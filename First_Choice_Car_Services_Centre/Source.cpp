@@ -8,7 +8,7 @@ using namespace std;
 
 int main()
 {
-	string codeName = "TC";
+	/*string codeName = "TC";
 	int code = 1001;
 	string names[2];
 
@@ -18,7 +18,10 @@ int main()
 	names[1] = "Eow";
 	
 	cout << names[0] + " " + names[1] << endl;
-	cout << c;
+	cout << c;*/
+
+
+
 
 	return 0;
 	//master
