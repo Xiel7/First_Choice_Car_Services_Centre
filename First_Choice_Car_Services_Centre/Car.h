@@ -1,11 +1,9 @@
 #pragma once
-#include "Customer.h"
-#include <iostream>
 #include <string>
 
 using namespace std;
 
-class Car : public Customer {
+class Car {
 
 private:
 	string crNo;
@@ -13,6 +11,6 @@ private:
 public:
 	Car();
 	Car(string crNo);
-	void setcrNo(string);
-	string getcrNo;
+	void setcrNo(string crNo);
+	string getcrNo();
 };

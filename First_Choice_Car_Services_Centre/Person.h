@@ -14,11 +14,11 @@ public:
 	Person();
 	Person(string firstName, string lastName, string id);
 
-	void setFirstName(string);
-	string getFirstName;
-	void setLastName(string);
-	string getLasttName;
-	void setID(string);
-	string getID;
+	void setFirstName(string fName);
+	string getFirstName();
+	void setLastName(string lName);
+	string getLasttName();
+	void setID(string id);
+	string getID();
 
 };
