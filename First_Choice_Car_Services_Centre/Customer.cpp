@@ -17,5 +17,5 @@ void Customer::printInfo()
 {
 	cout << "Customer Car: " << customerCar.getCrNo() << endl;
 	cout << "Customer Name: " << getFirstName() << " " << getLastName() << endl;
-	cout << "Customer ID: " << getID();
+	cout << "Customer ID: " << getID() << endl;
 }
