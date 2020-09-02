@@ -11,6 +11,8 @@ private:
 public:
 	Car();
 	Car(string crNo);
-	void setcrNo(string crNo);
-	string getcrNo();
+
+	//set get for crNo
+	void setCrNo(string crNo);
+	string getCrNo();
 };

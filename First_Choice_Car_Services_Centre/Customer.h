@@ -15,5 +15,5 @@ public:
 	Customer();
 	Customer(Car custCar, string firstName, string lastName, string custID);
 
-
+	void printInfo();
 };

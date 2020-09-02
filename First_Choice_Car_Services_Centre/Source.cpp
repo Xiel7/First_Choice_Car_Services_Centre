@@ -1,6 +1,7 @@
 #include <iostream>
 #include"Person.h"
 #include "Customer.h"
+#include "Car.h"
 #include <string>
 
 using namespace std;
@@ -20,8 +21,10 @@ int main()
 	cout << names[0] + " " + names[1] << endl;
 	cout << c;*/
 
+	Car nissan("WXY201");
+	Customer bakayarou(nissan, "Baka", "Yarou", "CT0001");
 
-
+	bakayarou.printInfo();
 
 	return 0;
 	//master

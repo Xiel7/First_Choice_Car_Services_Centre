@@ -14,6 +14,9 @@ public:
 	Person();
 	Person(string firstName, string lastName, string id);
 
+	virtual void printInfo() = 0;
+
+	//set get
 	void setFirstName(string fName);
 	string getFirstName();
 	void setLastName(string lName);
