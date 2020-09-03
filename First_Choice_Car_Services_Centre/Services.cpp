@@ -14,6 +14,7 @@ Services::Services(string transCode, string servicesDesc, Customer* customer, Te
 
 void Services::printService()
 {
+	cout << "\n";
 	cout << "Service Transaction Code: " << transCode << endl;
 	cout << "Service Description: " << servicesDesc << endl;
 	customer->printInfo();
@@ -21,6 +22,7 @@ void Services::printService()
 	/*cout << "Customer Car: " << customer->getCustomerCar().getCrNo() << endl;
 	cout << "Customer Name: " << customer->getFirstName() << " " << customer->getLastName() << endl;
 	cout << "Customer ID: " << customer->getID() << endl;*/
+	cout << "\n";
 }
 
 
