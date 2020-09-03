@@ -1,5 +1,6 @@
 #include <iostream>
 #include"Person.h"
+#include "Services.h"
 #include "Customer.h"
 #include "Technician.h"
 #include "Car.h"
@@ -25,12 +26,17 @@ int main()
 
 	Car nissan("WXY201");
 	
-	Technician techkun("Tech", "Kun", "TC1001");
-	Customer bakayarou(nissan, "Baka", "Yarou", "CT0001");
-	
+	Technician* techkun;
+	techkun = new Technician("Tech", "Kun", "TC1001");
 
-	bakayarou.printInfo();
-	techkun.printInfo();
+
+	Customer* bakayarou;
+	bakayarou = new Customer(nissan, "Baka", "Yarou", "CT0001");
+	
+	Services *service;
+	service = new Services("TC1001", "Car Wash", bakayarou, techkun);
+
+	service->printService();
 
 	return 0;
 	//master

@@ -11,6 +11,5 @@ private:
 public:
 	Technician();
 	Technician(string firstName, string lastName, string techID);
-
 	void printInfo();
 };

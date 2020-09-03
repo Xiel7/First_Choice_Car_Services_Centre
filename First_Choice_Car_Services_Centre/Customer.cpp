@@ -19,3 +19,12 @@ void Customer::printInfo()
 	cout << "Customer Name: " << getFirstName() << " " << getLastName() << endl;
 	cout << "Customer ID: " << getID() << endl;
 }
+
+void Customer::setCustomerCar(Car custCar)
+{
+	customerCar = custCar;
+}
+Car Customer::getCustomerCar()
+{
+	return customerCar;
+}
