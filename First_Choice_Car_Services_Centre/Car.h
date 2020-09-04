@@ -6,7 +6,7 @@ using namespace std;
 class Car {
 
 private:
-	string crNo;
+	string crNo;	
 
 public:
 	Car();

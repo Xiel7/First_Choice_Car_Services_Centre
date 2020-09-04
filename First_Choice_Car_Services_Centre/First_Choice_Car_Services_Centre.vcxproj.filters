@@ -59,9 +59,6 @@
     <ClInclude Include="Appointment.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>

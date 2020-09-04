@@ -9,15 +9,23 @@
 #include "Customer.h"
 #include "Technician.h"
 #include "Car.h"
-#include "Source.h"
 
 using namespace std;
 
+void logoScreen();
+void mainMenu();
+void managerLoginScreen(Manager* manager, int* valid, int sizeManager);
+void clearScreen(double n);
+void registrationScreen();
+void registerTechnician(Technician* technician);
+int choices(int n);
+
+
+
+int sizeManager;
 
 int main()
 {
-
-
 	/*string codeName = "TC";
 	int code = 1001;
 	string names[2];
@@ -29,7 +37,7 @@ int main()
 	
 	cout << names[0] + " " + names[1] << endl;
 	cout << c;*/
-	int sizeManager = 3;
+	sizeManager = 3;
 	Manager* manager;
 	manager = new Manager[sizeManager];
 	manager[0] = Manager("ImNikeer", "Nikeer123", "Nike", "Er", "MG1001");
@@ -73,18 +81,100 @@ int main()
 	Services* service;
 	service = new Services[10];
 
+	char option;
 	int valid = 0; //for do while loop 
-
+	int choice = 0;
 
 	logoScreen();//Logo Screen
 	clearScreen(1500);
+
 	do {
 		managerLoginScreen(manager, &valid, sizeManager);
 
 	} while (valid == 0);
-	clearScreen(1000);
+	clearScreen(1000);//manager login screen
 
+	do {
+		mainMenu();
+		choice = choices(8);
 
+		switch (choice)
+		{
+		case 1:
+			//Main Service
+			//Time Slot
+			break;
+		case 2:
+	    //Services(Input record)
+            //Transaction Code:
+            //Customer ID:
+            //Customer Name:
+            //Date:
+            //Car registration number:
+            //Services Description:
+            //Technician ID:
+            //Technician Name:
+			break;
+		case 3:
+		//Free Inspection
+            //Inspection code:
+            //Customer name:
+            //Inspection date:(must match with national day)
+            //Inspection description:
+            //Technician name:
+			break;
+		case 4:
+		//Customer ID:(Input this to search) 
+            //Number of service:
+            //Discount Rate:
+			break;
+		case 5:
+	    //Car registration number:(input this to search)
+             //Transaction Code:
+             //Customer ID:
+             //Customer Name:
+             //Date:
+             //Services Description:
+             //Technician ID:
+             //Technician Name:
+			break;
+		case 6:
+		//Technician ID:(input this to search)
+             //Technician name:
+             //Gender:
+             //Birth date:
+             //Phone Number:
+			break;
+		case 7:
+	    //a.Customer Registration
+            //Name:
+            //Gender:
+            //Birth date:
+            //Phone Number:
+            //Email address:(Optional)
+
+        //b.Technician Registration
+            //Name:
+            //Gender:
+            //Birth date:
+            //Field:
+
+        //c.Service Registration
+            //Name:
+            //Price:
+			break;
+		case 8:
+			cout << "Exited Successfully..." << endl;
+			exit(1);
+			break;
+
+		}
+
+		cout << "\n\n\nDo you wish to return to Main Menu?(Y/N) >";
+		cin >> option;
+		clearScreen(1000);
+	} while (toupper(option) == 'Y');
+	
 
 
 	return 0;
@@ -157,6 +247,7 @@ void mainMenu()
 5. Transaction History
 6. Technician Detail
 7. Registration
+8. Exit
     )===";
 	cout << screen << endl;
 }
@@ -166,3 +257,80 @@ void clearScreen(double n)
 	Sleep(n);
 	system("CLS");
 }
+
+void registrationScreen()
+{
+	int choice;
+	const char* screen = R"===(
+        REGISTRATION
+------------------------------
+1. Customer
+2. Technician
+3. Services
+    )===";
+
+	clearScreen(1000);
+	cout << screen << endl;
+	choice = choices(3);
+
+	switch (choice)
+	{
+	case 1:
+		//customer
+		break;
+	case 2:
+		//technician
+		break;
+	case 3:
+		//services
+		break;
+	}
+
+	
+
+
+}
+
+void registerTechnician(Technician* technician)
+{
+	const char* screen = R"===(
+    TECHNICIAN REGISTRATION
+------------------------------
+    )===";
+
+	cout << screen << endl;
+
+}   
+
+int choices(int n)
+{
+	int choice;
+	do {
+
+		cout << "Choice :";
+		cin >> choice;
+
+		if (choice <= 0 || choice > n)
+			printf("Please enter the right choice!\n");
+
+	} while (choice <= 0 || choice > n);
+
+	return choice;
+}
+
+//a.Customer Registration
+//     Name:
+//     Gender:
+//     Birth date:
+//     Phone Number:
+//     Email address:(Optional)
+//
+//   b.Technician Registration
+//      Name:
+//     Gender:
+//     Birth date:
+//     Field:
+//
+//   c.Service Registration
+//     Name:
+//     Price:
