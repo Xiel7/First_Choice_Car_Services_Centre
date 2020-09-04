@@ -12,7 +12,6 @@ Person::Person(string firstName, string lastName, string id)
 	this->firstName = firstName;
 	this->lastName = lastName;
 	this->id = id;
-	
 }
 
 

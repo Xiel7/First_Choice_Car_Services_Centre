@@ -1,18 +1,22 @@
 #include <iostream>
+#include <stdlib.h>
+#include <string>
+#include <Windows.h>
+
 #include"Person.h"
 #include "Services.h"
+#include "Manager.h"
 #include "Customer.h"
 #include "Technician.h"
 #include "Car.h"
-#include <string>
 #include "Source.h"
 
 using namespace std;
 
-void logoScreen();
 
 int main()
 {
+
 
 	/*string codeName = "TC";
 	int code = 1001;
@@ -25,21 +29,12 @@ int main()
 	
 	cout << names[0] + " " + names[1] << endl;
 	cout << c;*/
-
-	/*Car nissan("WXY201");
-	
-	Technician* techkun;
-	techkun = new Technician("Tech", "Kun", "TC1001");
-
-	
-	Customer* bakayarou;
-	bakayarou = new Customer(nissan, "Baka", "Yarou", "CT0001");
-
-	Services* service = NULL;
-
-	service = new Services("TC1001", "Car Wash", bakayarou, techkun);
-
-	service->printService();*/
+	int sizeManager = 3;
+	Manager* manager;
+	manager = new Manager[sizeManager];
+	manager[0] = Manager("ImNikeer", "Nikeer123", "Nike", "Er", "MG1001");
+	manager[1] = Manager("DidiHere", "Urdidi", "En Di", "Loh", "MG1002");
+	manager[2] = Manager("BoiLee", "Boiboi3253", "Chong Wai", "Lee", "MG1003");
 
 	Car* cars;
 	cars = new Car[10];
@@ -77,10 +72,20 @@ int main()
 
 	Services* service;
 	service = new Services[10];
-	service[0] = Services();
 
-	cust[0].printInfo();
-	logoScreen();
+	int valid = 0; //for do while loop 
+
+
+	logoScreen();//Logo Screen
+	clearScreen(1500);
+	do {
+		managerLoginScreen(manager, &valid, sizeManager);
+
+	} while (valid == 0);
+	clearScreen(1000);
+
+
+
 
 	return 0;
 	//master
@@ -102,4 +107,62 @@ void logoScreen()
  *********First Choice Car Services Centre***********
     )===";
 	cout << logo;
+}
+
+void managerLoginScreen(Manager *manager, int *valid, int sizeManager)
+{
+	const char* screen = R"===(
+         LOGIN SCREEN
+------------------------------
+    )===";
+	cout << screen << endl;
+
+	string userName, password;
+
+	cout << "Username: ";
+	cin >> userName;
+	cout << "Password: ";
+	cin >> password;
+
+	for (int i = 0; i < sizeManager; i++)
+	{
+		if (userName.compare(manager[i].getUsername()) == 0 && password.compare(manager[i].getPassword()) == 0)
+		{
+			*valid = 1;
+			cout << "Login Successful..." << endl;
+			break;
+		}
+		else if(i == sizeManager-1)
+		{
+			cout << "Wrong Username or Password!\nPlease re-enter." << endl;
+			*valid = 0;
+			clearScreen(1000);
+			break;
+		}
+			
+	}
+
+
+}
+
+void mainMenu()
+{
+	const char* screen = R"===(
+         MAIN MENU
+------------------------------
+1. Appointment
+2. Services
+3. Free Inspection
+4. Discount
+5. Transaction History
+6. Technician Detail
+7. Registration
+    )===";
+	cout << screen << endl;
+}
+
+void clearScreen(double n)
+{
+	Sleep(n);
+	system("CLS");
 }

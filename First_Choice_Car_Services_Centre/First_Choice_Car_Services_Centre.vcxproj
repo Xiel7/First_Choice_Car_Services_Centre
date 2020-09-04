@@ -139,8 +139,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Appointment.cpp" />
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="Customer.cpp" />
+    <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Person.cpp" />
     <ClCompile Include="Services.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -150,6 +152,7 @@
     <ClInclude Include="Appointment.h" />
     <ClInclude Include="Car.h" />
     <ClInclude Include="Customer.h" />
+    <ClInclude Include="Manager.h" />
     <ClInclude Include="Person.h" />
     <ClInclude Include="Services.h" />
     <ClInclude Include="Source.h" />
