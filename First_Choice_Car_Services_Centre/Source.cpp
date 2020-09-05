@@ -20,6 +20,7 @@ void registrationScreen();
 void registerTechnician();
 void registerCustomer();
 int choices(int n);
+void searchTechnician();
 
 int sizeManager;
 int sizeTechnician;
@@ -158,6 +159,7 @@ int main()
              //Technician Name:
 			break;
 		case 6:
+			searchTechnician();
 		//Technician ID:(input this to search)
              //Technician name:
              //Gender:
@@ -393,6 +395,42 @@ int choices(int n)
 	} while (choice <= 0 || choice > n);
 
 	return choice;
+}
+
+void searchTechnician()
+{
+	int choice;
+	do {
+		const char* search = R"===(
+        SEARCH Technician INFORMATION
+------------------------------
+1. First name
+2. Last name
+3. Technician ID
+    )===";
+		clearScreen(1000);
+		cout << search << endl;
+
+		do {
+			cout << "Enter the number to decide the search type :";
+			cin.ignore();
+			cin >> choice;
+		} while (choice != '1' && choice != '2' && choice != '3');
+		switch (choice)
+		{
+			case'1':
+				cout << "Enter the first name to search ";
+				break;
+			case'2':
+				break;
+			case'3':
+				break;
+		default:
+			cout << "Invalid number please enter again" << endl;
+
+			break;
+		}
+	} while (choice != '4');
 }
 
 //a.Customer Registration
