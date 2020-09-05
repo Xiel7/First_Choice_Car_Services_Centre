@@ -146,6 +146,7 @@ int main()
              //Phone Number:
 			break;
 		case 7:
+			registrationScreen();
 	    //a.Customer Registration
             //Name:
             //Gender:
@@ -279,7 +280,7 @@ void registrationScreen()
 		//customer
 		break;
 	case 2:
-		//technician
+		
 		break;
 	case 3:
 		//services
