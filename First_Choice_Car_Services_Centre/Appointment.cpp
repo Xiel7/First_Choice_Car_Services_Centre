@@ -9,19 +9,18 @@ Appointment::Appointment()
 
 }
 
-Appointment::Appointment(int day, int month, int year, int startHr, int startMin, string serviceType)
+Appointment::Appointment(int day, int month, int year, int startHr, int startMin, Services* services) : services(services)
 {
 	this->day = day;
 	this->month = month;
 	this->year = year;
 	this->startHr = startHr;
 	this->startMin = startMin;
-	this->serviceType = serviceType;
 }
 
 void Appointment::appointmentSet()
 {
-
+	cout << "Enter the date of the appointment :" << endl;
 }
 //set gets
 
@@ -75,12 +74,3 @@ int Appointment::getStartMin()
 	return startMin;
 }
 
-void Appointment::setServiceType(string srvcType)
-{
-	serviceType = srvcType;
-}
-
-string Appointment::getServiceType()
-{
-	return serviceType;
-}

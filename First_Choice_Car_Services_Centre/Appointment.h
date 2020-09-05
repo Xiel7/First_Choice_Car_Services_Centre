@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Services.h"
 #include <string>
 
 using namespace std;
@@ -11,12 +11,12 @@ private:
 	int year;
 	int startHr;
 	int startMin;
-	string serviceType;
+	Services* services;
 
 public:
 
 	Appointment();
-	Appointment(int d, int m, int y, int hr, int min, string serviceType);
+	Appointment(int d, int m, int y, int hr, int min, Services* services);
 
 	void appointmentSet();
 
@@ -31,7 +31,6 @@ public:
 	int getStartHr();
 	void setStartMin(int min);
 	int getStartMin();
-	void setServiceType(string srvcType);
-	string getServiceType();
+
 
 };

@@ -6,22 +6,19 @@ Services::Services()
 
 }
 
-Services::Services(string transCode, string servicesDesc, Customer* customer, Technician* technician): customer(customer), technician(technician)
+Services::Services(string transCode, string serviceType, string servicesDesc, Customer* customer, Technician* technician): customer(customer), technician(technician)
 {
+	this->serviceType = serviceType;
 	this->transCode = transCode;
 	this->servicesDesc = servicesDesc;
 }
 
-Services::Services(string transCode, string servicesDesc, Customer* customer, Technician* technician, Appointment* appointment) : customer(customer), technician(technician), appointment(appointment)
-{
-	this->transCode = transCode;
-	this->servicesDesc = servicesDesc;
-}
 
 void Services::printService()
 {
 	cout << "\n";
 	cout << "Service Transaction Code: " << transCode << endl;
+	cout << "Service Type: " << serviceType << endl;
 	cout << "Service Description: " << servicesDesc << endl;
 	customer->printInfo();
 	technician->printInfo();
@@ -71,13 +68,13 @@ Technician* Services::getTechnician()
 	return technician;
 }
 
-void Services::setAppointment(Appointment* appointment)
+
+void Services::setServiceType(string srvcType)
 {
-	this->appointment = appointment;
+	serviceType = srvcType;
 }
 
-Appointment* Services::getAppointment()
+string Services::getServiceType()
 {
-	return appointment;
+	return serviceType;
 }
-
