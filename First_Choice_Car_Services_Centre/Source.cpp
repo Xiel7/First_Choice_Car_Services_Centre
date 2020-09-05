@@ -14,69 +14,88 @@ using namespace std;
 
 void logoScreen();
 void mainMenu();
-void managerLoginScreen(Manager* manager, int* valid, int sizeManager);
-void clearScreen(double n);
+void managerLoginScreen(int* valid);
+void clearScreen(int n);
 void registrationScreen();
-void registerTechnician(Technician* technician);
+void registerTechnician();
+void registerCustomer();
 int choices(int n);
 
-
-
 int sizeManager;
+int sizeTechnician;
+int sizeCar;
+int sizeCustomer;
+
+Manager* pManager;
+Car* pCars;
+Customer* pCust;
+Technician* pTech;
 
 int main()
 {
-	/*string codeName = "TC";
-	int code = 1001;
-	string names[2];
-
-	string c = codeName + to_string(code);
-
-	names[0] = "Song Kai";
-	names[1] = "Eow";
+	/*Technician hi;
+	hi.registerTechnician(2+1);
+	hi.printInfo();*/
 	
-	cout << names[0] + " " + names[1] << endl;
-	cout << c;*/
+	//initialize base class
 	sizeManager = 3;
-	Manager* manager;
-	manager = new Manager[sizeManager];
-	manager[0] = Manager("ImNikeer", "Nikeer123", "Nike", "Er", "MG1001");
-	manager[1] = Manager("DidiHere", "Urdidi", "En Di", "Loh", "MG1002");
-	manager[2] = Manager("BoiLee", "Boiboi3253", "Chong Wai", "Lee", "MG1003");
+	sizeTechnician = 5;
+	sizeCustomer = 10;
+	
+	pManager = new Manager[sizeManager];
+	pManager[0] = Manager("ImNikeer", "Nikeer123", "Nike", "Er", "MG1001");
+	pManager[1] = Manager("DidiHere", "Urdidi", "En Di", "Loh", "MG1002");
+	pManager[2] = Manager("BoiLee", "Boiboi3253", "Chong Wai", "Lee", "MG1003");
 
-	Car* cars;
-	cars = new Car[10];
-	cars[0] = Car("WXY101");
-	cars[1] = Car("WTX3145");
-	cars[2] = Car("VES2651");
-	cars[3] = Car("GJD3101");
-	cars[4] = Car("KFS4385");
-	cars[5] = Car("MCD74");
-	cars[6] = Car("WWW1");
-	cars[7] = Car("SGF562");
-	cars[8] = Car("WSH1031");
-	cars[9] = Car("WXT9985");
+	//sizeManager = sizeManager + 1;            // double the previous size
 
-	Customer* cust;
-	cust = new Customer[10];
-	cust[0] = Customer(cars[0], "Baka", "Yarou", "CT0001");
-	cust[1] = Customer(cars[1], "Soon Rong", "Tan", "CT0002");
-	cust[2] = Customer(cars[2], "Ken", "Wong", "CT0003");
-	cust[3] = Customer(cars[3], "Benny", "Loh", "CT0004");
-	cust[4] = Customer(cars[4], "Kamal", "Ahri", "CT0005");
-	cust[5] = Customer(cars[5], "Ali", "Yan", "CT0006");
-	cust[6] = Customer(cars[6], "Muthu", "Sini", "CT0007");
-	cust[7] = Customer(cars[7], "Song Kai", "Eow", "CT0008");
-	cust[8] = Customer(cars[8], "Aaron", "Chia", "CT0009");
-	cust[9] = Customer(cars[9], "Lei Hou", "Keng", "CT0010");
+	//Manager* temp = new Manager[sizeManager]; // create new bigger array.
 
-	Technician* tech;
-	tech = new Technician[5];
-	tech[0] = Technician("Sai Seng", "Wong", "TC0001");
-	tech[1] = Technician("Ramli", "Kao", "TC0002");
-	tech[2] = Technician("Ali", "Gin", "TC0003");
-	tech[3] = Technician("Steady", "Bro", "TC0004");
-	tech[4] = Technician("Speed", "Run", "TC0005");
+	//for (int i = 0; i < 3; i++) {
+	//	temp[i] = pManager[i];       // copy values to new array.
+	//}
+	//delete[] pManager;              // free old array memory.
+	//pManager = temp;                 // now a points to new array.
+
+	//pManager[3] = Manager("BoiLee", "Boiboi3253", "Chong Wai", "Lee", "MG1003");
+
+	//for (int i = 0; i < sizeManager; i++)
+	//{
+	//	pManager[i].printInfo();
+	//}
+
+	pCars = new Car[10];
+	pCars[0] = Car("WXY101", "ProtonWira", "White");
+	pCars[1] = Car("WTX3145", "ToyotaVios", "Grey");
+	pCars[2] = Car("VES2651", "MercedesBenz", "Black");
+	pCars[3] = Car("GJD3101", "HondaJazz", "Red");
+	pCars[4] = Car("KFS4385", "HondaSivic", "Black");
+	pCars[5] = Car("MCD74", "Kancil", "White");
+	pCars[6] = Car("WWW1", "ToyotaEstima", "Gold");
+	pCars[7] = Car("SGF562", "Myvi", "Green");
+	pCars[8] = Car("WSH1031", "ProtonSaga", "White");
+	pCars[9] = Car("WXT9985", "ToyotaVios", "Black");
+
+	
+	pCust = new Customer[10];
+	pCust[0] = Customer(pCars[0], "Baka", "Yarou", "CT0001", "012-5342543", 'F');
+	pCust[1] = Customer(pCars[1], "Soon Rong", "Tan", "CT0002", "013-6558657", 'M');
+	pCust[2] = Customer(pCars[2], "Ken", "Wong", "CT0003", "015-7873543", 'M');
+	pCust[3] = Customer(pCars[3], "Benny", "Loh", "CT0004", "012-9232543", 'M');
+	pCust[4] = Customer(pCars[4], "Kamal", "Ahri", "CT0005", "011-5875243", 'F');
+	pCust[5] = Customer(pCars[5], "Ali", "Yan", "CT0006", "016-8765213", 'M');
+	pCust[6] = Customer(pCars[6], "Muthu", "Sini", "CT0007", "017-5313543", 'F');
+	pCust[7] = Customer(pCars[7], "Song Kai", "Eow", "CT0008", "017-0762543", 'M');
+	pCust[8] = Customer(pCars[8], "Aaron", "Chia", "CT0009", "018-5365343", 'M');
+	pCust[9] = Customer(pCars[9], "Lei Hou", "Keng", "CT0010", "019-5452543", 'M');
+
+	
+	pTech = new Technician[5];
+	pTech[0] = Technician("Sai Seng", "Wong", "TC0001");
+	pTech[1] = Technician("Ramli", "Kao", "TC0002");
+	pTech[2] = Technician("Ali", "Gin", "TC0003");
+	pTech[3] = Technician("Steady", "Bro", "TC0004");
+	pTech[4] = Technician("Speed", "Run", "TC0005");
 
 	Services* service;
 	service = new Services[10];
@@ -89,7 +108,7 @@ int main()
 	clearScreen(1500);
 
 	do {
-		managerLoginScreen(manager, &valid, sizeManager);
+		managerLoginScreen(&valid);
 
 	} while (valid == 0);
 	clearScreen(1000);//manager login screen
@@ -200,7 +219,7 @@ void logoScreen()
 	cout << logo;
 }
 
-void managerLoginScreen(Manager *manager, int *valid, int sizeManager)
+void managerLoginScreen(int *valid)
 {
 	const char* screen = R"===(
          LOGIN SCREEN
@@ -217,7 +236,7 @@ void managerLoginScreen(Manager *manager, int *valid, int sizeManager)
 
 	for (int i = 0; i < sizeManager; i++)
 	{
-		if (userName.compare(manager[i].getUsername()) == 0 && password.compare(manager[i].getPassword()) == 0)
+		if (userName.compare(pManager[i].getUsername()) == 0 && password.compare(pManager[i].getPassword()) == 0)
 		{
 			*valid = 1;
 			cout << "Login Successful..." << endl;
@@ -253,7 +272,7 @@ void mainMenu()
 	cout << screen << endl;
 }
 
-void clearScreen(double n)
+void clearScreen(int n)
 {
 	Sleep(n);
 	system("CLS");
@@ -277,10 +296,10 @@ void registrationScreen()
 	switch (choice)
 	{
 	case 1:
-		//customer
+		registerCustomer();
 		break;
 	case 2:
-		
+		registerTechnician();
 		break;
 	case 3:
 		//services
@@ -292,14 +311,71 @@ void registrationScreen()
 
 }
 
-void registerTechnician(Technician* technician)
+void registerCustomer()
 {
+	int tempSize;
+	tempSize = sizeCustomer;
+
+	Customer* tempCustomer = new Customer;
+	const char* screen = R"===(
+    CUSTOMER REGISTRATION
+------------------------------
+    )===";
+	clearScreen(1000);
+	cout << screen << endl;
+
+	sizeCustomer++;
+	tempCustomer->registerCustomer(sizeCustomer);
+
+	Customer* temp = new Customer[sizeCustomer];
+
+	for (int i = 0; i < tempSize; i++)
+	{
+		temp[i] = pCust[i];
+	}
+	
+	delete[] pCust;
+	pCust = temp;
+
+	pCust[sizeCustomer - 1] = tempCustomer[0];
+	cout << "New Customer: " << endl;
+	pCust[sizeCustomer - 1].printInfo();
+
+	
+	
+
+}
+
+void registerTechnician()
+{
+	int tempSize;
+	tempSize = sizeTechnician;
+
+	Technician* tempTech = new Technician;
+
 	const char* screen = R"===(
     TECHNICIAN REGISTRATION
 ------------------------------
     )===";
-
+	clearScreen(1000);
 	cout << screen << endl;
+
+	sizeTechnician++;
+	tempTech->registerTechnician(sizeTechnician);
+	
+	Technician* temp = new Technician[sizeTechnician];
+
+	for (int i = 0; i < tempSize; i++)
+	{
+		temp[i] = pTech[i];
+	}
+	delete[] pTech;
+	pTech = temp;
+
+
+	pTech[sizeManager - 1] = tempTech[0];
+	cout << "New Technician: " << endl;
+	pTech[sizeManager - 1].printInfo();
 
 }   
 
