@@ -1,22 +1,24 @@
 #pragma once
 #include "Services.h"
+
 #include <string>
 
 using namespace std;
 
 class Appointment {
 private:
+	Services* services;
 	int day;
 	int month;
 	int year;
 	int startHr;
 	int startMin;
-	Services* services;
+	
 
 public:
 
 	Appointment();
-	Appointment(int d, int m, int y, int hr, int min, Services* services);
+	Appointment(int day, int month, int year, int startHr, int startMin, Services* services);
 
 	void appointmentSet();
 

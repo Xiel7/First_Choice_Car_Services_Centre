@@ -340,6 +340,7 @@ void registerCustomer()
 	pCust = temp;
 
 	pCust[sizeCustomer - 1] = tempCustomer[0];
+	cout << "\n";
 	cout << "New Customer: " << endl;
 	pCust[sizeCustomer - 1].printInfo();
 

@@ -2,7 +2,6 @@
 
 #include "Customer.h"
 #include "Technician.h"
-#include "Appointment.h"
 
 #include <iostream>
 #include <string>

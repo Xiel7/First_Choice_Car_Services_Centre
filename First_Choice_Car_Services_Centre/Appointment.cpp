@@ -9,7 +9,7 @@ Appointment::Appointment()
 
 }
 
-Appointment::Appointment(int day, int month, int year, int startHr, int startMin, Services* services) : services(services)
+Appointment::Appointment(int day, int month, int year, int startHr, int startMin, Services* services): services(services)
 {
 	this->day = day;
 	this->month = month;
