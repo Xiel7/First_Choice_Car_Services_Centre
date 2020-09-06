@@ -9,6 +9,7 @@ class Manager : public Person {
 private:
 	string username;
 	string password;
+	string abbrev = "MN";
 
 public:
 	Manager();

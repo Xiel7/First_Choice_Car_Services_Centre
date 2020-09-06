@@ -18,10 +18,44 @@ Appointment::Appointment(int day, int month, int year, int startHr, int startMin
 	this->startMin = startMin;
 }
 
+Appointment::Appointment(Services* services) : services(services)
+{
+	
+}
+
 void Appointment::appointmentSet()
 {
-	cout << "Enter the date of the appointment :" << endl;
+	cout << "-------------------------------------" << endl;
+	cout << " Date of the appointment (dd/MM/YYYY) " << endl;
+	cout << "-------------------------------------" << endl;
+	cout << "Enter the day: ";
+	cin >> day;
+	cout << "Enter the month: ";
+	cin >> month;
+	cout << "Enter the year: ";
+	cin >> year;
+	cout << "-------------------------------------" << endl;
+	cout << " Time of the appointment (2400HR) " << endl;
+	cout << "-------------------------------------" << endl;
+	cout << "Enter the hour: ";
+	cin >> startHr;
+	cout << "Enter the min: ";
+	cin >> startMin;
+
+
+
 }
+
+void Appointment::printAppointment()
+{
+	cout << "Appointment" << endl;
+	cout << "-----------" << endl;
+	cout << "Date: " << day << "/" << month << "/" << year << endl;
+	cout << "Time: " << startHr << startMin << endl;
+	cout << endl;
+
+}
+
 //set gets
 
 void Appointment::setDay(int d)
@@ -72,5 +106,16 @@ void Appointment::setStartMin(int min)
 int Appointment::getStartMin()
 {
 	return startMin;
+}
+
+
+void Appointment::setServices(Services* services)
+{
+	this->services = services;
+}
+
+Services* Appointment::getServices()
+{
+	return services;
 }
 

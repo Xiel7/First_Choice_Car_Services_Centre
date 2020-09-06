@@ -5,6 +5,7 @@
 
 #include"Person.h"
 #include "Services.h"
+#include "Appointment.h"
 #include "Manager.h"
 #include "Customer.h"
 #include "Technician.h"
@@ -21,49 +22,39 @@ void registerTechnician();
 void registerCustomer();
 int choices(int n);
 void searchTechnician();
+void makeAppointment();
+void displayAllTechnician();
+
 
 int sizeManager;
 int sizeTechnician;
 int sizeCar;
 int sizeCustomer;
+int sizeServices;
+int sizeAppoint;
 
 Manager* pManager;
 Car* pCars;
 Customer* pCust;
 Technician* pTech;
+Services* pServices;
+Appointment* pAppoint;
+
 
 int main()
-{
-	/*Technician hi;
-	hi.registerTechnician(2+1);
-	hi.printInfo();*/
+{	
 	
 	//initialize base class
 	sizeManager = 3;
 	sizeTechnician = 5;
 	sizeCustomer = 10;
+	sizeServices = 2;
+	sizeAppoint = 1;
 	
 	pManager = new Manager[sizeManager];
 	pManager[0] = Manager("ImNikeer", "Nikeer123", "Nike", "Er", "MG1001");
 	pManager[1] = Manager("DidiHere", "Urdidi", "En Di", "Loh", "MG1002");
 	pManager[2] = Manager("BoiLee", "Boiboi3253", "Chong Wai", "Lee", "MG1003");
-
-	//sizeManager = sizeManager + 1;            // double the previous size
-
-	//Manager* temp = new Manager[sizeManager]; // create new bigger array.
-
-	//for (int i = 0; i < 3; i++) {
-	//	temp[i] = pManager[i];       // copy values to new array.
-	//}
-	//delete[] pManager;              // free old array memory.
-	//pManager = temp;                 // now a points to new array.
-
-	//pManager[3] = Manager("BoiLee", "Boiboi3253", "Chong Wai", "Lee", "MG1003");
-
-	//for (int i = 0; i < sizeManager; i++)
-	//{
-	//	pManager[i].printInfo();
-	//}
 
 	pCars = new Car[10];
 	pCars[0] = Car("WXY101", "ProtonWira", "White");
@@ -76,7 +67,6 @@ int main()
 	pCars[7] = Car("SGF562", "Myvi", "Green");
 	pCars[8] = Car("WSH1031", "ProtonSaga", "White");
 	pCars[9] = Car("WXT9985", "ToyotaVios", "Black");
-
 	
 	pCust = new Customer[10];
 	pCust[0] = Customer(pCars[0], "Baka", "Yarou", "CT0001", "012-5342543", 'F');
@@ -89,7 +79,6 @@ int main()
 	pCust[7] = Customer(pCars[7], "Song Kai", "Eow", "CT0008", "017-0762543", 'M');
 	pCust[8] = Customer(pCars[8], "Aaron", "Chia", "CT0009", "018-5365343", 'M');
 	pCust[9] = Customer(pCars[9], "Lei Hou", "Keng", "CT0010", "019-5452543", 'M');
-
 	
 	pTech = new Technician[5];
 	pTech[0] = Technician("Sai Seng", "Wong", "TC0001");
@@ -97,9 +86,13 @@ int main()
 	pTech[2] = Technician("Ali", "Gin", "TC0003");
 	pTech[3] = Technician("Steady", "Bro", "TC0004");
 	pTech[4] = Technician("Speed", "Run", "TC0005");
+	
+	pServices = new Services[sizeServices];
+	pServices[0] = Services("SVC0001", "Car Wash", "Car Wash", 20.00, &pCust[1], &pTech[1]);
+	pServices[1] = Services("SVC0002", "Repair", "Repair", 140.00, &pCust[2], &pTech[2]);
 
-	Services* service;
-	service = new Services[10];
+	pAppoint = new Appointment[sizeAppoint];
+	pAppoint[0] = Appointment(31, 8, 2019, 14, 20, &pServices[0]);
 
 	char option;
 	int valid = 0; //for do while loop 
@@ -107,12 +100,13 @@ int main()
 
 	logoScreen();//Logo Screen
 	clearScreen(1500);
-
+	makeAppointment();
 	do {
 		managerLoginScreen(&valid);
 
 	} while (valid == 0);
 	clearScreen(1000);//manager login screen
+	
 
 	do {
 		mainMenu();
@@ -121,6 +115,7 @@ int main()
 		switch (choice)
 		{
 		case 1:
+			makeAppointment();
 			//Main Service
 			//Time Slot
 			break;
@@ -196,8 +191,6 @@ int main()
 		cin >> option;
 		clearScreen(1000);
 	} while (toupper(option) == 'Y');
-	
-
 
 	return 0;
 	//master
@@ -349,6 +342,29 @@ void registerCustomer()
 
 }
 
+void makeAppointment()
+{
+	int tempSize;
+	tempSize = sizeAppoint;
+
+	Appointment* tempAppoint = new Appointment;
+	const char* screen = R"===(
+         APPOINTMENT
+------------------------------
+    )===";
+	clearScreen(1000);
+	cout << screen << endl;
+
+	sizeAppoint++;
+	tempAppoint->appointmentSet();
+	tempAppoint->getServices()->registerService(pCust, sizeCustomer, pTech, sizeTechnician);
+
+	tempAppoint->printAppointment();
+	cout << "Appointment done..." << endl;
+
+
+}
+
 void registerTechnician()
 {
 	int tempSize;
@@ -401,35 +417,73 @@ int choices(int n)
 void searchTechnician()
 {
 	int choice;
-	string getFName;
-	string getLName;
+	char selection;
 	string getID;
-	Technician result;
 
-		const char* search = R"===(
-        SEARCH Technician INFORMATION
+	const char* screen = R"===(
+ SEARCH TECHNICIAN INFORMATION
 ------------------------------
-1. First name
-2. Last name
-3. Technician ID
     )===";
-		clearScreen(1000);
-		cout << search << endl;
-		choice = choices(3);
+	clearScreen(1000);
+	cout << screen << endl;
+
+	cout << "Do you wish to display all technician <Y/N> : ";
+	cin >> selection;
+	do {
 		
-		switch (choice)
+
+		try
 		{
-			case'1':
-				result.search_by_FName();
-				break;
-			case'2':
-				result.search_by_LName();
-				break;
-			case'3':
-				result.search_by_ID();
-				break;
+			if (toupper(selection) == 'Y')
+			{
+				displayAllTechnician();
+			}
+			else if (toupper(selection) == 'N')
+			{
+				//nothing
+			}
+			else
+			{
+				throw 99;
+				cout << "Do you wish to display all technician: ";
+				cin >> selection;
+			}
 		}
+		catch (int e)
+		{
+			cerr << "Please enter the right choice." << endl;
+			break;
+		}
+		
+
+	} while (!(toupper(selection) == 'Y' || toupper(selection) == 'N'));
+
+	cout << "Enter the technician ID: ";
+	cin >> getID;
+	for (int i = 0; i < sizeTechnician; i++)
+	{
+		if (getID.compare(pTech[i].getID()) == 0)
+		{
+			pTech[i].printInfo();
+		}
+	}
 }
+
+void displayAllTechnician()
+{
+
+	const char* screen = R"===(
+  ALL TECHNICIAN INFORMATION
+------------------------------
+    )===";
+	cout << screen << endl;
+	//cout << "techIDName" << endl;
+	for (int i = 0; i < sizeTechnician; i++)
+	{
+		cout << pTech[i].getID() << "	" << pTech[i].getFirstName() << " " << pTech[i].getLastName() << endl;
+	}
+}
+
 
 //a.Customer Registration
 //     Name:

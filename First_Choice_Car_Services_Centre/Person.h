@@ -21,6 +21,7 @@ public:
 	string getFirstName();
 	void setLastName(string lName);
 	string getLastName();
+
 	void setID(string id);
 	string getID();
 

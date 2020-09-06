@@ -19,8 +19,10 @@ public:
 
 	Appointment();
 	Appointment(int day, int month, int year, int startHr, int startMin, Services* services);
+	Appointment(Services* services);
 
 	void appointmentSet();
+	void printAppointment();
 
 	//set gets
 	void setDay(int d);
@@ -34,5 +36,7 @@ public:
 	void setStartMin(int min);
 	int getStartMin();
 
+	void setServices(Services* services);
+	Services* getServices();
 
 };
