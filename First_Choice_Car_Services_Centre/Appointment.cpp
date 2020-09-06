@@ -52,6 +52,7 @@ void Appointment::printAppointment()
 	cout << "-----------" << endl;
 	cout << "Date: " << day << "/" << month << "/" << year << endl;
 	cout << "Time: " << startHr << startMin << endl;
+	services->printService();
 	cout << endl;
 
 }

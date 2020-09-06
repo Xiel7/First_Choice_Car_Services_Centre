@@ -58,9 +58,7 @@ void Services::registerService(Customer* customer, int sizeCust, Technician* tec
 	switch (choice)
 	{
 	case 1:
-		cout << "Hello";
 		serviceType = "Car Wash";
-		cout << "Hello";
 		carWash();
 		break;
 	case 2:
@@ -149,7 +147,6 @@ void Services::carWash()
 	cout << "2. Deep Cleaning - RM20" << endl;
 	cout << "3. In Out Cleaning - RM100" << endl;
 	cout << "Select the service wanted: ";
-	cin >> choice;
 	choice = choices(3);
 
 	switch (choice)
@@ -178,7 +175,6 @@ void Services::repair()
 	cout << "3. Cracks - RM1500" << endl;
 	cout << "4. Bent Frames - RM3000" << endl;
 	cout << "Select the service wanted: ";
-	cin >> choice;
 	choice = choices(4);
 
 	switch (choice)
@@ -217,7 +213,6 @@ void Services::repaint()
 	cout << "9. Blue - RM300" << endl;
 	cout << "10. Blue(Chrome) - RM500" << endl;
 	cout << "Select the service wanted: ";
-	cin >> choice;
 	choice = choices(10);
 
 	switch (choice)
@@ -275,7 +270,6 @@ void Services::waxPolish()
 	cout << "4. Basic Polish & Wax 2 Steps (Meguiar’s) - RM280" << endl;
 	cout << "5. One Step Waxing (Meguiar’s) - RM160" << endl;
 	cout << "Select the service wanted: ";
-	cin >> choice;
 	choice = choices(5);
 
 	switch (choice)
@@ -312,7 +306,6 @@ void Services::maintenance()
 	cout << "3. Alignment and chamber adjust - RM200" << endl;
 	cout << "4. Change 2 new tires - RM1250" << endl;
 	cout << "Select the service wanted: ";
-	cin >> choice;
 	choice = choices(4);
 
 	switch (choice)
@@ -342,7 +335,6 @@ void Services::inspection()
 	cout << "------------" << endl;
 	cout << "1. Inspection - RM190" << endl;
 	cout << "Select the service wanted: ";
-	cin >> choice;
 	choice = choices(1);
 
 	switch (choice)

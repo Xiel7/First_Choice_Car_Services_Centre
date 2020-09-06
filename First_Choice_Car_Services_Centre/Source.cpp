@@ -348,6 +348,7 @@ void makeAppointment()
 	tempSize = sizeAppoint;
 
 	Appointment* tempAppoint = new Appointment;
+	Services* tempService = new Services;
 	const char* screen = R"===(
          APPOINTMENT
 ------------------------------
@@ -357,8 +358,9 @@ void makeAppointment()
 
 	sizeAppoint++;
 	tempAppoint->appointmentSet();
-	tempAppoint->getServices()->registerService(pCust, sizeCustomer, pTech, sizeTechnician);
+	tempService->registerService(pCust, sizeCustomer, pTech, sizeTechnician);
 
+	tempAppoint->setServices(tempService);
 	tempAppoint->printAppointment();
 	cout << "Appointment done..." << endl;
 
