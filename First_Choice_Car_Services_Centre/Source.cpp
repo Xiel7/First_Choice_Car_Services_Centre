@@ -401,7 +401,11 @@ int choices(int n)
 void searchTechnician()
 {
 	int choice;
-	do {
+	string getFName;
+	string getLName;
+	string getID;
+	Technician result;
+
 		const char* search = R"===(
         SEARCH Technician INFORMATION
 ------------------------------
@@ -411,27 +415,20 @@ void searchTechnician()
     )===";
 		clearScreen(1000);
 		cout << search << endl;
-
-		do {
-			cout << "Enter the number to decide the search type :";
-			cin.ignore();
-			cin >> choice;
-		} while (choice != '1' && choice != '2' && choice != '3');
+		choice = choices(3);
+		
 		switch (choice)
 		{
 			case'1':
-				cout << "Enter the first name to search ";
+				result.search_by_FName();
 				break;
 			case'2':
+				result.search_by_LName();
 				break;
 			case'3':
+				result.search_by_ID();
 				break;
-		default:
-			cout << "Invalid number please enter again" << endl;
-
-			break;
 		}
-	} while (choice != '4');
 }
 
 //a.Customer Registration

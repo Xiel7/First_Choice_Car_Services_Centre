@@ -1,12 +1,13 @@
 #include "Technician.h"
 #include "Person.h"
 
-
+#include <fstream>
 #include <iostream>
 #include <string>
 #include <sstream>
 #include <iomanip>
 
+using namespace std;
 
 Technician::Technician()
 {
@@ -47,4 +48,102 @@ void Technician::registerTechnician(int size)
 	setLastName(lName);
 
 	setID(techID);
+}
+
+void Technician::search_by_FName()
+{
+	/*char FName[20];
+	Technician result;
+	ifstream file("Text_File.txt");
+
+	cout << "Enter name to find: ";
+	cin >> FName;
+
+	if (file.is_open())
+	{
+		if (!file.eof())
+		{
+			if (firstName == FName)
+			{
+				file.read((char*)&FName, sizeof(FName));
+				cout << "\n Technician Name:\t" << name;
+				cout << "\n Technician ID:\t" << id;
+				cout << "\n Position:\t" << position;
+				result.print_grade(results);
+			}
+			else
+			{
+				cout << "Technician not found.";
+			}
+		}
+
+		else
+		{
+			cout << "Unable to open file.";
+		}
+	}*/
+}//help check
+
+void Technician::search_by_LName()
+{
+	/*char LName[20];
+	Technician result;
+	ifstream file("Text_File.txt");
+
+	cout << "Enter name to find: ";
+	cin >> LName;
+
+	if (file.is_open()) {
+
+		if (!file.eof()) {
+
+			if (lastName == LName) {
+				file.read((char*)&LName, sizeof(LName));
+				cout << "\n Technician Name:\t" << name;
+				cout << "\n Technician ID:\t" << id;
+				cout << "\n Position:\t" << position;
+				result.print_grade(results);
+			}
+			else {
+				cout << "Technician not found.";
+			}
+		}
+
+		
+	else {
+		cout << "Unable to open file.";
+	}
+	}*/
+}
+
+void Technician::search_by_ID()
+{
+	/*char ID[20];
+	Technician result;
+	ifstream file("Text_File.txt");
+
+	cout << "Enter name to find: ";
+	cin >> ID;
+
+	if (file.is_open()) {
+
+		if (!file.eof()) {
+
+			if (id == ID) {
+				file.read((char*)&ID, sizeof(ID));
+				cout << "\n Technician Name:\t" << name;
+				cout << "\n Technician ID:\t" << id;
+				cout << "\n Position:\t" << position;
+				result.print_grade(results);
+			}
+			else {
+				cout << "Technician not found.";
+			}
+		}
+
+		
+	else {
+		cout << "Unable to open file.";
+	}
+	}*/
 }
