@@ -358,7 +358,7 @@ void makeAppointment()
 
 	sizeAppoint++;
 	tempAppoint->appointmentSet();
-	tempService->registerService(pCust, sizeCustomer, pTech, sizeTechnician);
+	tempService->registerService(pCust, sizeCustomer, pTech, sizeTechnician, sizeServices);
 
 	tempAppoint->setServices(tempService);
 	tempAppoint->printAppointment();

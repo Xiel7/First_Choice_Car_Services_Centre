@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
+#include <sstream>
 
 using namespace std;
 
@@ -35,7 +36,7 @@ void Services::printService()
 	cout << "\n";
 }
 
-void Services::registerService(Customer* customer, int sizeCust, Technician* technician, int sizeTech)
+void Services::registerService(Customer* customer, int sizeCust, Technician* technician, int sizeTech, int sizeService)
 {
 	int choice;
 
@@ -92,10 +93,10 @@ void Services::registerService(Customer* customer, int sizeCust, Technician* tec
 	do {
 		cout << "Enter the customer ID that took the service (You must register the customer first): ";
 		cin >> custID;
-
+		
 		for (int i = 0; i < sizeCust; i++)
 		{
-			if (custID.compare(customer[i].getID()))
+			if (custID.compare(customer[i].getID()) == 0)
 			{
 				setCustomer(&customer[i]);
 				cout << "Setting customer done..." << endl;
@@ -120,7 +121,7 @@ void Services::registerService(Customer* customer, int sizeCust, Technician* tec
 
 		for (int i = 0; i < sizeTech; i++)
 		{
-			if (techID.compare(technician[i].getID()))
+			if (techID.compare(technician[i].getID()) == 0)
 			{
 				setTechnician(&technician[i]);
 				cout << "Setting technician done..." << endl;
@@ -133,8 +134,18 @@ void Services::registerService(Customer* customer, int sizeCust, Technician* tec
 				cout << "Please enter the technician ID that exist." << endl;
 			}
 		}
+
 	} while (valid == 0);
 	
+	string tcCode, num;
+
+	stringstream ss;
+
+	ss << setw(4) << setfill('0') << sizeService;
+	num = ss.str();
+
+	tcCode = abbrev + num;
+	setTransCode(tcCode);
 }
 
 

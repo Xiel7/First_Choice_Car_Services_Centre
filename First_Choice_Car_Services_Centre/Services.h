@@ -16,13 +16,15 @@ private:
 	double price;
 	Customer* customer;
 	Technician* technician;
+	string abbrev = "SVC";
+	
 
 public:
 	Services();
 	Services(string transCode,string serviceType, string servicesDesc, double price, Customer* customer, Technician* technician);
 
 	void printService();
-	void registerService(Customer* customer, int sizeCust, Technician* technician, int sizeTech);
+	void registerService(Customer* customer, int sizeCust, Technician* technician, int sizeTech, int sizeService);
 	int choices(int n);
 
 	void carWash();
