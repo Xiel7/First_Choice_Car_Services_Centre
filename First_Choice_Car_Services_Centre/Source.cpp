@@ -89,7 +89,7 @@ int main()
 	
 	pServices = new Services[sizeServices];
 	pServices[0] = Services("SVC0001", "Car Wash", "Car Wash", 20.00, &pCust[1], &pTech[1]);
-	pServices[1] = Services("SVC0002", "Repair", "Repair", 140.00, &pCust[2], &pTech[2]);
+	pServices[1] = Services("SVC0002", "Repair", "Repair", 140.00, &pCust[2], &pTech[1]);
 
 	pAppoint = new Appointment[sizeAppoint];
 	pAppoint[0] = Appointment(31, 8, 2019, 14, 20, &pServices[0]);
@@ -100,7 +100,6 @@ int main()
 
 	logoScreen();//Logo Screen
 	clearScreen(1500);
-	makeAppointment();
 	do {
 		managerLoginScreen(&valid);
 
@@ -155,30 +154,9 @@ int main()
 			break;
 		case 6:
 			searchTechnician();
-		//Technician ID:(input this to search)
-             //Technician name:
-             //Gender:
-             //Birth date:
-             //Phone Number:
 			break;
 		case 7:
 			registrationScreen();
-	    //a.Customer Registration
-            //Name:
-            //Gender:
-            //Birth date:
-            //Phone Number:
-            //Email address:(Optional)
-
-        //b.Technician Registration
-            //Name:
-            //Gender:
-            //Birth date:
-            //Field:
-
-        //c.Service Registration
-            //Name:
-            //Price:
 			break;
 		case 8:
 			cout << "Exited Successfully..." << endl;
@@ -344,8 +322,9 @@ void registerCustomer()
 
 void makeAppointment()
 {
-	int tempSize;
-	tempSize = sizeAppoint;
+	int tempSizeA, tempSizeS;
+	tempSizeA = sizeAppoint;
+	tempSizeS = sizeServices;
 
 	Appointment* tempAppoint = new Appointment;
 	Services* tempService = new Services;
@@ -357,11 +336,41 @@ void makeAppointment()
 	cout << screen << endl;
 
 	sizeAppoint++;
+	sizeServices++;
+
 	tempAppoint->appointmentSet();
 	tempService->registerService(pCust, sizeCustomer, pTech, sizeTechnician, sizeServices);
-
+	tempService->printService();
 	tempAppoint->setServices(tempService);
+
 	tempAppoint->printAppointment();
+
+	//reasign pointer
+	Appointment* tempA = new Appointment[sizeAppoint];
+
+	for (int i = 0; i < tempSizeA; i++)
+	{
+		tempA[i] = pAppoint[i];
+	}
+	delete[] pAppoint;
+	pAppoint = tempA;
+
+	//reasign pointer
+	Services* tempS = new Services[sizeServices];
+
+	for (int i = 0; i < tempSizeS; i++)
+	{
+		tempS[i] = pServices[i];
+	}
+	delete[] pServices;
+	pServices = tempS;
+	
+	//set new service and appointment
+	pServices[sizeServices - 1] = tempService[0];
+	pAppoint[sizeAppoint - 1] = tempAppoint[0];
+
+	pAppoint[sizeAppoint - 1].printAppointment();
+
 	cout << "Appointment done..." << endl;
 
 
@@ -467,6 +476,22 @@ void searchTechnician()
 		if (getID.compare(pTech[i].getID()) == 0)
 		{
 			pTech[i].printInfo();
+			cout << "Services handled by " << pTech[i].getFirstName() << " " << pTech[i].getLastName() << endl;
+			
+			int count;
+			for (int j = 0; j < sizeServices; j++)
+			{
+				count = j + 1;
+				if (pTech[i].getID().compare(pServices[j].getTechnician()->getID()) == 0)
+				{
+					cout << "Service No." << count;
+					pServices[j].printService();
+					count++;
+				}
+				
+			}
+
+			break;
 		}
 	}
 }

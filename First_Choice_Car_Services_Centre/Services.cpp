@@ -24,6 +24,8 @@ void Services::printService()
 {
 	
 	cout << "\n";
+	cout << "Service" << endl;
+	cout << "-------" << endl;
 	cout << "Service Transaction Code: " << transCode << endl;
 	cout << "Service Type: " << serviceType << endl;
 	cout << "Service Description: " << servicesDesc << endl;
@@ -56,6 +58,7 @@ void Services::registerService(Customer* customer, int sizeCust, Technician* tec
 
 	choice = choices(6);
 
+	cout << "\n";
 	switch (choice)
 	{
 	case 1:
@@ -91,7 +94,7 @@ void Services::registerService(Customer* customer, int sizeCust, Technician* tec
 	cout << "---------------" << endl;
 
 	do {
-		cout << "Enter the customer ID that took the service (You must register the customer first): ";
+		cout << "Enter the customer ID that took the service (You must register the customer first) [EX: CT0001]: ";
 		cin >> custID;
 		
 		for (int i = 0; i < sizeCust; i++)
@@ -116,7 +119,7 @@ void Services::registerService(Customer* customer, int sizeCust, Technician* tec
 	cout << "---------------" << endl;
 	
 	do {
-		cout << "Enter the technician ID that took the service (You must register the customer first): ";
+		cout << "Enter the technician ID that took the service (You must register the customer first) [EX: TC0001]: ";
 		cin >> techID;
 
 		for (int i = 0; i < sizeTech; i++)

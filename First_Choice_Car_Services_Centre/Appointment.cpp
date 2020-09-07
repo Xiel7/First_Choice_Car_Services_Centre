@@ -47,14 +47,15 @@ void Appointment::appointmentSet()
 }
 
 void Appointment::printAppointment()
-{
+{	
+	cout << "\n";
 	cout << "Appointment" << endl;
 	cout << "-----------" << endl;
 	cout << "Date: " << day << "/" << month << "/" << year << endl;
 	cout << "Time: " << startHr << startMin << endl;
 	services->printService();
 	cout << endl;
-
+	cout << "\n";
 }
 
 //set gets
