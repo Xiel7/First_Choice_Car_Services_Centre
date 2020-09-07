@@ -18,30 +18,61 @@ Appointment::Appointment(int day, int month, int year, int startHr, int startMin
 	this->startMin = startMin;
 }
 
-Appointment::Appointment(Services* services) : services(services)
+
+void Appointment::dateValidation(int d, int m, int y, int* valid)
 {
-	
+	if (d < 0 || d > 31 || m < 0 || m > 12 || (d > 29 && m == 2 && y % 4 != 0) || (d > 30 && m == 2 && y % 4 == 0) || (d > 30 && m == 4) || (d > 30 && m == 6) || (d > 30 && m == 9) || (d > 30 && m == 11))
+	{
+		cout << "Invalide date! Please enter valid date. " << endl;
+		*valid = 0;
+	}
+	else
+		*valid = 1;
+}
+
+void Appointment::timeValidation(int inHr, int inMin, int* valid)
+{
+	if (inHr < 8 || inHr > 20 || inMin < 0 || inMin > 59)
+	{
+		cout << "Invalide time! Please enter valid time." << endl;
+		*valid = 0;
+	}
+	else
+		*valid = 1;
 }
 
 void Appointment::appointmentSet()
 {
+	int valid = 1;
 	cout << "-------------------------------------" << endl;
 	cout << " Date of the appointment (dd/MM/YYYY) " << endl;
 	cout << "-------------------------------------" << endl;
-	cout << "Enter the day: ";
-	cin >> day;
-	cout << "Enter the month: ";
-	cin >> month;
-	cout << "Enter the year: ";
-	cin >> year;
+
+	do {
+
+		
+		cout << "Enter the day (dd): ";
+		cin >> day;
+		cout << "Enter the month (MM): ";
+		cin >> month;
+		cout << "Enter the year (YYYY): ";
+		cin >> year;
+		dateValidation(day, month, year, &valid);
+		
+	} while (valid == 0);
+	
 	cout << "-------------------------------------" << endl;
 	cout << " Time of the appointment (2400HR) " << endl;
 	cout << "-------------------------------------" << endl;
-	cout << "Enter the hour: ";
-	cin >> startHr;
-	cout << "Enter the min: ";
-	cin >> startMin;
 
+	do {
+		cout << "Enter the hour: ";
+		cin >> startHr;
+		cout << "Enter the min: ";
+		cin >> startMin;
+		timeValidation(startHr, startMin, &valid);
+	} while (valid == 0);
+	
 
 
 }

@@ -22,6 +22,8 @@ Technician::Technician(string fName, string lName, string techID):Person(fName, 
 void Technician::printInfo()
 {
 	cout << "\n";
+	cout << "Technician" << endl;
+	cout << "----------" << endl;
 	cout << "Technician Name: " << getFirstName() << " " << getLastName() << endl;
 	cout << "Technician ID: " << getID() << endl;
 	cout << "\n";

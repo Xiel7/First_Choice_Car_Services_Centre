@@ -19,11 +19,12 @@ public:
 
 	Appointment();
 	Appointment(int day, int month, int year, int startHr, int startMin, Services* services);
-	Appointment(Services* services);
 
+	void dateValidation(int d, int m, int y, int* valid);
+	void timeValidation(int inHr, int inMin, int* valid);
 	void appointmentSet();
 	void printAppointment();
-
+	
 	//set gets
 	void setDay(int d);
 	int getDay();

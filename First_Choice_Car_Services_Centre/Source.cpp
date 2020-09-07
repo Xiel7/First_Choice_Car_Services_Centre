@@ -24,7 +24,9 @@ int choices(int n);
 void searchTechnician();
 void makeAppointment();
 void displayAllTechnician();
-
+void displayAllCustomer();
+void transacHistory();
+void discountPrivilege();
 
 int sizeManager;
 int sizeTechnician;
@@ -48,15 +50,16 @@ int main()
 	sizeManager = 3;
 	sizeTechnician = 5;
 	sizeCustomer = 10;
-	sizeServices = 2;
-	sizeAppoint = 1;
+	sizeServices = 10;
+	sizeAppoint = 10;
+	sizeCar = 10;
 	
 	pManager = new Manager[sizeManager];
 	pManager[0] = Manager("ImNikeer", "Nikeer123", "Nike", "Er", "MG1001");
 	pManager[1] = Manager("DidiHere", "Urdidi", "En Di", "Loh", "MG1002");
 	pManager[2] = Manager("BoiLee", "Boiboi3253", "Chong Wai", "Lee", "MG1003");
 
-	pCars = new Car[10];
+	pCars = new Car[sizeCar];
 	pCars[0] = Car("WXY101", "ProtonWira", "White");
 	pCars[1] = Car("WTX3145", "ToyotaVios", "Grey");
 	pCars[2] = Car("VES2651", "MercedesBenz", "Black");
@@ -68,7 +71,7 @@ int main()
 	pCars[8] = Car("WSH1031", "ProtonSaga", "White");
 	pCars[9] = Car("WXT9985", "ToyotaVios", "Black");
 	
-	pCust = new Customer[10];
+	pCust = new Customer[sizeCustomer];
 	pCust[0] = Customer(pCars[0], "Baka", "Yarou", "CT0001", "012-5342543", 'F');
 	pCust[1] = Customer(pCars[1], "Soon Rong", "Tan", "CT0002", "013-6558657", 'M');
 	pCust[2] = Customer(pCars[2], "Ken", "Wong", "CT0003", "015-7873543", 'M');
@@ -80,7 +83,7 @@ int main()
 	pCust[8] = Customer(pCars[8], "Aaron", "Chia", "CT0009", "018-5365343", 'M');
 	pCust[9] = Customer(pCars[9], "Lei Hou", "Keng", "CT0010", "019-5452543", 'M');
 	
-	pTech = new Technician[5];
+	pTech = new Technician[sizeTechnician];
 	pTech[0] = Technician("Sai Seng", "Wong", "TC0001");
 	pTech[1] = Technician("Ramli", "Kao", "TC0002");
 	pTech[2] = Technician("Ali", "Gin", "TC0003");
@@ -90,9 +93,27 @@ int main()
 	pServices = new Services[sizeServices];
 	pServices[0] = Services("SVC0001", "Car Wash", "Car Wash", 20.00, &pCust[1], &pTech[1]);
 	pServices[1] = Services("SVC0002", "Repair", "Repair", 140.00, &pCust[2], &pTech[1]);
-
+	pServices[2] = Services("SVC0003", "Wax & Polish", "Polish & Restoration", 500.00, &pCust[3], &pTech[2]);
+	pServices[3] = Services("SVC0004", "Wax & Polish", "Waxing", 160.00, &pCust[3], &pTech[3]);
+	pServices[4] = Services("SVC0005", "Wax & Polish", "One Step Waxing (Meguiar's)", 160.00, &pCust[3], &pTech[2]);
+	pServices[5] = Services("SVC0006", "Wax & Polish", "Polish & Wax 3 Steps (Meguiar's)", 500.00, &pCust[3], &pTech[0]);
+	pServices[6] = Services("SVC0007", "Wax & Polish", "One Step Waxing (Meguiar's)", 160.00, &pCust[3], &pTech[1]);
+	pServices[7] = Services("SVC0008", "Wax & Polish", " Basic Polish & Wax 2 Steps (Meguiar's", 280.00, &pCust[3], &pTech[3]);
+	pServices[8] = Services("SVC0009", "Wax & Polish", "Polish & Restoration", 500.00, &pCust[3], &pTech[4]);
+	pServices[9] = Services("SVC00010", "Wax & Polish", "One Step Waxing (Meguiar's)", 160.00, &pCust[3], &pTech[0]);
+	
 	pAppoint = new Appointment[sizeAppoint];
 	pAppoint[0] = Appointment(31, 8, 2019, 14, 20, &pServices[0]);
+	pAppoint[1] = Appointment(2, 9, 2019, 11, 20, &pServices[1]);
+	pAppoint[2] = Appointment(30, 9, 2019, 12, 30, &pServices[2]);
+	pAppoint[3] = Appointment(27, 10, 2019, 10, 10, &pServices[3]);
+	pAppoint[4] = Appointment(19, 12, 2019, 10, 30, &pServices[4]);
+	pAppoint[5] = Appointment(1, 2, 2020, 13, 40, &pServices[5]);
+	pAppoint[6] = Appointment(9, 3, 2020, 11, 15, &pServices[6]);
+	pAppoint[7] = Appointment(13, 4, 2020, 15, 30, &pServices[7]);
+	pAppoint[8] = Appointment(7, 5, 2020, 11, 20, &pServices[8]);
+	pAppoint[9] = Appointment(5, 6, 2020, 12, 30, &pServices[9]);
+
 
 	char option;
 	int valid = 0; //for do while loop 
@@ -130,35 +151,18 @@ int main()
             //Technician Name:
 			break;
 		case 3:
-		//Free Inspection
-            //Inspection code:
-            //Customer name:
-            //Inspection date:(must match with national day)
-            //Inspection description:
-            //Technician name:
+			discountPrivilege();
 			break;
 		case 4:
-		//Customer ID:(Input this to search) 
-            //Number of service:
-            //Discount Rate:
+			transacHistory();
 			break;
 		case 5:
-	    //Car registration number:(input this to search)
-             //Transaction Code:
-             //Customer ID:
-             //Customer Name:
-             //Date:
-             //Services Description:
-             //Technician ID:
-             //Technician Name:
-			break;
-		case 6:
 			searchTechnician();
 			break;
-		case 7:
+		case 6:
 			registrationScreen();
 			break;
-		case 8:
+		case 7:
 			cout << "Exited Successfully..." << endl;
 			exit(1);
 			break;
@@ -233,14 +237,13 @@ void mainMenu()
 	const char* screen = R"===(
          MAIN MENU
 ------------------------------
-1. Appointment
-2. Services
-3. Free Inspection
-4. Discount
-5. Transaction History
-6. Technician Detail
-7. Registration
-8. Exit
+1. Make an Appointment
+2. Display Summary Reports
+3. Discount Privilege
+4. Transaction History
+5. Technician Detail
+6. Registration
+7. Exit
     )===";
 	cout << screen << endl;
 }
@@ -340,10 +343,17 @@ void makeAppointment()
 
 	tempAppoint->appointmentSet();
 	tempService->registerService(pCust, sizeCustomer, pTech, sizeTechnician, sizeServices);
-	tempService->printService();
-	tempAppoint->setServices(tempService);
 
-	tempAppoint->printAppointment();
+	//National Day Free Inspection
+	if (tempAppoint->getDay() == 31 && tempAppoint->getMonth() == 8 && tempService->getServiceType() == "Inspection")
+	{
+		tempService->setPrice(0.00);
+		cout << endl;
+		cout << "Free Inspection for National Day!" << endl;
+		cout << endl;
+	}
+
+	tempAppoint->setServices(tempService);
 
 	//reasign pointer
 	Appointment* tempA = new Appointment[sizeAppoint];
@@ -408,22 +418,6 @@ void registerTechnician()
 	pTech[sizeManager - 1].printInfo();
 
 }   
-
-int choices(int n)
-{
-	int choice;
-	do {
-
-		cout << "Choice :";
-		cin >> choice;
-
-		if (choice <= 0 || choice > n)
-			printf("Please enter the right choice!\n");
-
-	} while (choice <= 0 || choice > n);
-
-	return choice;
-}
 
 void searchTechnician()
 {
@@ -504,6 +498,7 @@ void displayAllTechnician()
 ------------------------------
     )===";
 	cout << screen << endl;
+	clearScreen(1000);
 	//cout << "techIDName" << endl;
 	for (int i = 0; i < sizeTechnician; i++)
 	{
@@ -511,20 +506,138 @@ void displayAllTechnician()
 	}
 }
 
+void displayAllCustomer()
+{
+	const char* screen = R"===(
+  ALL CUSTOMER INFORMATION
+------------------------------
+    )===";
+	cout << screen << endl;
+	clearScreen(1000);
+	
+	for (int i = 0; i < sizeTechnician; i++)
+	{
+		cout << pCust[i].getID() << "	" << pCust[i].getFirstName() << " " << pCust[i].getLastName() << endl;
+	}
+}
 
-//a.Customer Registration
-//     Name:
-//     Gender:
-//     Birth date:
-//     Phone Number:
-//     Email address:(Optional)
-//
-//   b.Technician Registration
-//      Name:
-//     Gender:
-//     Birth date:
-//     Field:
-//
-//   c.Service Registration
-//     Name:
-//     Price:
+void transacHistory()
+{
+	string carRegisNum;
+	int count;
+	bool recordFound = false;
+	const char* screen = R"===(
+     TRANSACTION HISTORY
+------------------------------
+    )===";
+	clearScreen(1000);
+	cout << screen << endl;
+
+	cout << "Enter the car registration number: ";
+	cin >> carRegisNum;
+
+
+	for (int i = 0; i < sizeAppoint; i++)
+	{
+		
+		if (carRegisNum.compare(pAppoint[i].getServices()->getCustomer()->getCustomerCar().getCrNo()) == 0)
+		{
+			count = i + 1;
+			cout << endl;
+			cout << "Transaction No." << count << endl;
+			cout << "-----------------" << endl;
+			pAppoint[i].printAppointment();
+			recordFound = true;
+		}
+		else if (i == sizeAppoint - 1 && !recordFound)
+		{
+			cout << "No record was found for this car registration number." << endl;
+		}
+	}
+}
+
+void discountPrivilege()
+{
+	string custID;
+	bool recordFound = false;
+	int serviceCount = 0;
+	double discountPercent = 0;
+
+	const char* screen = R"===(
+      DISCOUNT PRIVILEGE
+      (For Wax & Polish)
+------------------------------
+No. of Service   Discount Rate
+   5 - 7            10%
+   8 - 9            30%
+  Every 10       Free 1 service
+    )===";
+	clearScreen(1000);
+	cout << screen << endl;
+
+	cout << endl;
+	cout << "Enter the customer ID (EX: CT0001) : ";
+	cin >> custID;
+
+	for (int i = 0; i < sizeCustomer; i++)
+	{
+		if (custID.compare(pCust[i].getID()) == 0)
+		{
+			for (int j = 0; j < sizeServices; j++)
+			{
+				if (pCust[i].getID().compare(pServices[j].getCustomer()->getID()) == 0)
+				{
+					if (pServices[j].getServiceType().compare("Wax & Polish") == 0)
+					{
+						serviceCount++;
+						recordFound = true;
+					}
+				}
+				
+			}
+			
+		}
+		else if (i == sizeServices - 1 && !recordFound)
+		{
+			cout << "No record of Wax & Polish service found for this customer ID." << endl;
+		}
+	}
+
+	if (recordFound)
+	{
+		cout << "Number of Service for Wax & Polish : " << serviceCount << endl;
+		serviceCount = serviceCount % 10;
+
+		if (serviceCount >= 5 && serviceCount <= 7)
+		{
+			discountPercent = 0.10;
+		}
+		else if (serviceCount >= 8 && serviceCount <= 9)
+		{
+			discountPercent = 0.30;
+		}
+		else if (serviceCount == 0)
+		{
+			discountPercent = 1.00;
+		}
+
+		cout << "This customer is entitled to " << discountPercent * 100 << "% discount in Wax & Polish" << endl;
+	}
+
+}
+
+int choices(int n)
+{
+	int choice;
+	do {
+
+		cout << "Choice :";
+		cin >> choice;
+
+		if (choice <= 0 || choice > n)
+			printf("Please enter the right choice!\n");
+
+	} while (choice <= 0 || choice > n);
+
+	return choice;
+}

@@ -18,6 +18,8 @@ Customer::Customer(Car custCar, string firstName, string lastName, string custID
 void Customer::printInfo()
 {
 	cout << "\n";
+	cout << "Customer" << endl;
+	cout << "--------" << endl;
 	cout << "Customer Car: "<< endl;
 	customerCar.printInfo();
 	cout << "Customer Name: " << getFirstName() << " " << getLastName() << endl;
