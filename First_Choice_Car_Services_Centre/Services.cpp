@@ -248,19 +248,19 @@ void Services::repaint()
 		price = 500.00;
 		break;
 	case 5:
-		servicesDesc = "Green";
-		price = 300.00;
-		break;
-	case 6:
-		servicesDesc = "Green(Chrome)";
-		price = 500.00;
-		break;
-	case 7:
 		servicesDesc = "Yellow";
 		price = 300.00;
 		break;
-	case 8:
+	case 6:
 		servicesDesc = "Yellow(Chrome)";
+		price = 500.00;
+		break;
+	case 7:
+		servicesDesc = "Green";
+		price = 300.00;
+		break;
+	case 8:
+		servicesDesc = "Green(Chrome)";
 		price = 500.00;
 		break;
 	case 9:
@@ -280,9 +280,9 @@ void Services::waxPolish()
 	cout << "------------" << endl;
 	cout << "1. Polish & Restoration - RM500" << endl;
 	cout << "2. Waxing - RM160" << endl;
-	cout << "3. Polish & Wax 3 Steps (Meguiar’s) - RM500" << endl;
-	cout << "4. Basic Polish & Wax 2 Steps (Meguiar’s) - RM280" << endl;
-	cout << "5. One Step Waxing (Meguiar’s) - RM160" << endl;
+	cout << "3. Polish & Wax 3 Steps (Meguiar's) - RM500" << endl;
+	cout << "4. Basic Polish & Wax 2 Steps (Meguiar's) - RM280" << endl;
+	cout << "5. One Step Waxing (Meguiar's) - RM160" << endl;
 	cout << "Select the service wanted: ";
 	choice = choices(5);
 
@@ -297,15 +297,15 @@ void Services::waxPolish()
 		price = 160.00;
 		break;
 	case 3:
-		servicesDesc = "Polish & Wax 3 Steps (Meguiar’s)";
+		servicesDesc = "Polish & Wax 3 Steps (Meguiar's)";
 		price = 500.00;
 		break;
 	case 4:
-		servicesDesc = "Basic Polish & Wax 2 Steps (Meguiar’s)";
+		servicesDesc = "Basic Polish & Wax 2 Steps (Meguiar's)";
 		price = 280.00;
 		break;
 	case 5:
-		servicesDesc = "One Step Waxing (Meguiar’s)";
+		servicesDesc = "One Step Waxing (Meguiar's)";
 		price = 160.00;
 		break;
 	}
