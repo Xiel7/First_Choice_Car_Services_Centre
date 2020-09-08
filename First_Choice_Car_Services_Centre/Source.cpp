@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string>
 #include <Windows.h>
+#include <iomanip>
 
 #include"Person.h"
 #include "Services.h"
@@ -26,6 +27,9 @@ void makeAppointment();
 void displayAllTechnician();
 void displayAllCustomer();
 void displayAllAppointments();
+void displayAllCustomerTransactions();
+void displaySummary();
+void displayAllServices();
 void transacHistory();
 void discountPrivilege();
 
@@ -129,6 +133,7 @@ int main()
 	} while (valid == 0);
 	clearScreen(1000);//manager login screen
 	
+	
 
 	do {
 		mainMenu();
@@ -138,19 +143,9 @@ int main()
 		{
 		case 1:
 			makeAppointment();
-			//Main Service
-			//Time Slot
 			break;
 		case 2:
-	    //Services(Input record)
-            //Transaction Code:
-            //Customer ID:
-            //Customer Name:
-            //Date:
-            //Car registration number:
-            //Services Description:
-            //Technician ID:
-            //Technician Name:
+			displaySummary();
 			break;
 		case 3:
 			discountPrivilege();
@@ -343,66 +338,92 @@ void makeAppointment()
 	sizeAppoint++;
 	sizeServices++;
 
-	tempAppoint->appointmentSet();
-	tempService->registerService(pCust, sizeCustomer, pTech, sizeTechnician, sizeServices);
+	
+	
+	// check if appointment time is valid
+	int valid;
+	do {
+		
+		valid = 1;
+		tempAppoint->appointmentSet();
+		tempService->registerService(pCust, sizeCustomer, pTech, sizeTechnician, sizeServices);
 
-	//National Day Free Inspection
-	if (tempAppoint->getDay() == 31 && tempAppoint->getMonth() == 8 && tempService->getServiceType() == "Inspection")
-	{
-		tempService->setPrice(0.00);
-		cout << endl;
-		cout << "Free Inspection for National Day!" << endl;
-		cout << endl;
-	}
-	//Wax & Polish discount
-	else if (tempService->getServiceType() == "Wax & Polish")
-	{
-		bool recordFound = false;
-		int serviceCount = 0;
-		double discountPercent = 0;
-
-		for (int i = 0; i < tempSizeS; i++)
+		//National Day Free Inspection
+		if (tempAppoint->getDay() == 31 && tempAppoint->getMonth() == 8 && tempService->getServiceType() == "Inspection")
 		{
-			if (tempService->getCustomer()->getID().compare(pServices[i].getCustomer()->getID()) == 0)
-			{
-				if (pServices[i].getServiceType().compare("Wax & Polish") == 0)
-				{
-					serviceCount++;
-					recordFound = true;
-				}
-			}
-
-		}
-
-		if (recordFound)
-		{
+			tempService->setPrice(0.00);
 			cout << endl;
-			cout << "Number of Service for Wax & Polish : " << serviceCount << endl;
-			serviceCount = serviceCount % 10;
+			cout << "Free Inspection for National Day!" << endl;
+			cout << endl;
+		}
+		//Wax & Polish discount
+		else if (tempService->getServiceType() == "Wax & Polish")
+		{
+			bool recordFound = false;
+			int serviceCount = 0;
+			double discountPercent = 0;
 
-			if (serviceCount >= 5 && serviceCount <= 7)
+			for (int i = 0; i < tempSizeS; i++)
 			{
-				discountPercent = 0.10;
-			}
-			else if (serviceCount >= 8 && serviceCount <= 9)
-			{
-				discountPercent = 0.30;
-			}
-			else if (serviceCount == 0)
-			{
-				discountPercent = 1.00;
+				if (tempService->getCustomer()->getID().compare(pServices[i].getCustomer()->getID()) == 0)
+				{
+					if (pServices[i].getServiceType().compare("Wax & Polish") == 0)
+					{
+						serviceCount++;
+						recordFound = true;
+					}
+				}
+
 			}
 
-			
-			cout << "Customer Mr."<< tempService->getCustomer()->getLastName() <<" is entitled to " << discountPercent * 100 << "% discount in Wax & Polish" << endl;
-			cout << "Please check the discount privilege for more information..." << endl;
+			if (recordFound)
+			{
+				cout << endl;
+				cout << "Number of Service for Wax & Polish : " << serviceCount << endl;
+				serviceCount = serviceCount % 10;
+
+				if (serviceCount >= 5 && serviceCount <= 7)
+				{
+					discountPercent = 0.10;
+				}
+				else if (serviceCount >= 8 && serviceCount <= 9)
+				{
+					discountPercent = 0.30;
+				}
+				else if (serviceCount == 0)
+				{
+					discountPercent = 1.00;
+				}
+
+
+				cout << "Customer Mr." << tempService->getCustomer()->getLastName() << " is entitled to " << discountPercent * 100 << "% discount in Wax & Polish" << endl;
+				cout << "Please check the discount privilege for more information..." << endl;
+			}
+
+			tempService->setPrice(tempService->getPrice() - (tempService->getPrice() * discountPercent));
+
 		}
 
-		tempService->setPrice(tempService->getPrice() - (tempService->getPrice() * discountPercent));
+		tempAppoint->setServices(tempService);
+		
 
-	}
+		for (int i = 0; i < tempSizeA; i++)
+		{
+			if (tempAppoint->getDay() == pAppoint[i].getDay() && tempAppoint->getMonth() == pAppoint[i].getMonth() &&
+				tempAppoint->getYear() == pAppoint[i].getYear()
+				&& tempAppoint->getStartHr() == pAppoint[i].getStartHr() && tempAppoint->getStartMin() == pAppoint[i].getStartMin()
+				&& tempAppoint->getServices()->getTechnician()->getID() == pAppoint[i].getServices()->getTechnician()->getID())
+			{
+				
+				valid = 0;
+				cout << "Appointment clashed! Please try again!" << endl;
+			}
+		}
 
-	tempAppoint->setServices(tempService);
+
+	} while (valid == 0);
+	
+	
 
 	//reasign pointer
 	Appointment* tempA = new Appointment[sizeAppoint];
@@ -519,17 +540,21 @@ void searchTechnician()
 		if (getID.compare(pTech[i].getID()) == 0)
 		{
 			pTech[i].printInfo();
+			
 			cout << "Services handled by " << pTech[i].getFirstName() << " " << pTech[i].getLastName() << endl;
 			
 			int count;
 			for (int j = 0; j < sizeServices; j++)
 			{
-				count = j + 1;
+				count = 0;
 				if (pTech[i].getID().compare(pServices[j].getTechnician()->getID()) == 0)
 				{
-					cout << "Service No." << count;
-					pServices[j].printService();
 					count++;
+					cout << "==============" << endl;
+					cout << "Service No." << count << endl;
+					cout << "==============" << endl;
+					pServices[j].printService();
+					
 				}
 				
 			}
@@ -546,8 +571,9 @@ void displayAllTechnician()
   ALL TECHNICIAN INFORMATION
 ------------------------------
     )===";
-	cout << screen << endl;
 	clearScreen(1000);
+	cout << screen << endl;
+	
 	//cout << "techIDName" << endl;
 	for (int i = 0; i < sizeTechnician; i++)
 	{
@@ -607,7 +633,73 @@ void transacHistory()
 
 void displayAllAppointments()
 {
+	int count = 0;
+	const char* screen = R"===(
+       ALL APPOINTMENTS
+------------------------------
+    )===";
+	clearScreen(1000);
+	cout << screen << endl;
+	
+	cout << "No.  Date(dd/MM/YYYY)      Time(HHMM)     Service Type    Car Registration  CustomerID  TechnicianID" << endl;
+	cout << "---  ----------------      ----------     ------------    ----------------  ----------  ------------" << endl;
 
+	for (int i = 0; i < sizeAppoint; i++)
+	{
+		count++;
+		printf("%3d   %02d/%02d/%02d           %02d%02d %20s         %10s  %10s  %12s\n",count, pAppoint[i].getDay(), pAppoint[i].getMonth(), pAppoint[i].getYear(), 
+			pAppoint[i].getStartHr(),pAppoint[i].getStartMin(),pAppoint[i].getServices()->getServiceType().c_str(), 
+			pAppoint[i].getServices()->getCustomer()->getCustomerCar().getCrNo().c_str(),
+			pAppoint[i].getServices()->getCustomer()->getID().c_str(),
+			pAppoint[i].getServices()->getTechnician()->getID().c_str());
+	}
+}
+
+void displayAllServices()
+{
+	int count = 0;
+	const char* screen = R"===(
+       ALL SERVICES
+------------------------------
+    )===";
+	clearScreen(1000);
+	cout << screen << endl;
+	
+	cout << "No.  Date(dd/MM/YYYY)      Time(HHMM) Transaction Code     Service Type                            Services Description       TechnicianID" << endl;
+	cout << "---  ----------------      ---------- ----------------     ------------    --------------------------------------------       ------------" << endl;
+
+	for (int i = 0; i < sizeAppoint; i++)
+	{
+		count++;
+		printf("%3d   %02d/%02d/%02d           %02d%02d %16s %20s         %40s       %12s\n", count, pAppoint[i].getDay(), pAppoint[i].getMonth(), pAppoint[i].getYear(),
+			pAppoint[i].getStartHr(), pAppoint[i].getStartMin(), pAppoint[i].getServices()->getTransCode().c_str(), pAppoint[i].getServices()->getServiceType().c_str(),
+			pAppoint[i].getServices()->getServicesDesc().c_str(),
+			pAppoint[i].getServices()->getTechnician()->getID().c_str());
+	}
+}
+
+void displayAllCustomerTransactions()
+{
+	int count = 0;
+	const char* screen = R"===(
+   ALL CUSTOMER TRANSACTIONS
+------------------------------
+    )===";
+	clearScreen(1000);
+	cout << screen << endl;
+
+	cout << "No.  Date(dd/MM/YYYY)    Time(HHMM) CustomerID       Service Type     Price Charged  Car Registration          Car Model" << endl;
+	cout << "---  ----------------    ---------- ----------       ------------     -------------  ----------------          ---------" << endl;
+
+	for (int i = 0; i < sizeAppoint; i++)
+	{
+		count++;
+		printf("%3d   %02d/%02d/%02d           %02d%02d  %10s           %12s    %13.2f  %16s  %20s\n", count, pAppoint[i].getDay(), pAppoint[i].getMonth(), pAppoint[i].getYear(),
+			pAppoint[i].getStartHr(), pAppoint[i].getStartMin(), pAppoint[i].getServices()->getCustomer()->getID().c_str(), pAppoint[i].getServices()->getServiceType().c_str(),
+			pAppoint[i].getServices()->getPrice(),
+			pAppoint[i].getServices()->getCustomer()->getCustomerCar().getCrNo().c_str(),
+			pAppoint[i].getServices()->getCustomer()->getCustomerCar().getCrMode().c_str());
+	}
 }
 
 void discountPrivilege()
@@ -682,14 +774,40 @@ No. of Service   Discount Rate
 
 void displaySummary()
 {
+	int choice;
 	const char* screen = R"===(
        SUMMARY REPORTS
 ------------------------------
 1. All Appointments
 2. All Customer Transactions
-3. 
+3. All Services Report
+4. All Customers
+5. All Technicians
     )===";
+	clearScreen(1000);
 	cout << screen << endl;
+
+	choice = choices(5);
+
+	switch (choice)
+	{
+	case 1:
+		displayAllAppointments();
+		break;
+	case 2:
+		displayAllCustomerTransactions();
+		break;
+	case 3:
+		displayAllServices();
+		break;
+	case 4:
+		displayAllCustomer();
+		break;
+	case 5:
+		displayAllTechnician();
+		break;
+	}
+
 }
 
 int choices(int n)

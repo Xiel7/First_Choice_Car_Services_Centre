@@ -26,7 +26,7 @@ void Services::printService()
 	cout << "\n";
 	cout << "Service" << endl;
 	cout << "-------" << endl;
-	cout << "Service Transaction Code: " << transCode << endl;
+	cout << "Transaction Code: " << transCode << endl;
 	cout << "Service Type: " << serviceType << endl;
 	cout << "Service Description: " << servicesDesc << endl;
 	cout << "Service Price : RM " << fixed << setprecision(2) << price << endl;
