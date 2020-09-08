@@ -259,12 +259,11 @@ void registrationScreen()
 ------------------------------
 1. Customer
 2. Technician
-3. Services
     )===";
 
 	clearScreen(1000);
 	cout << screen << endl;
-	choice = choices(3);
+	choice = choices(2);
 
 	switch (choice)
 	{
@@ -273,9 +272,6 @@ void registrationScreen()
 		break;
 	case 2:
 		registerTechnician();
-		break;
-	case 3:
-		//services
 		break;
 	}
 
@@ -768,6 +764,10 @@ No. of Service   Discount Rate
 		}
 
 		cout << "This customer is entitled to " << discountPercent * 100 << "% discount in Wax & Polish" << endl;
+	}
+	else 
+	{
+		cout << "This customer haven't had wax and polish services" << endl;
 	}
 
 }
