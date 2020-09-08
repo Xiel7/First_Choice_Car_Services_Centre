@@ -352,6 +352,52 @@ void makeAppointment()
 		cout << "Free Inspection for National Day!" << endl;
 		cout << endl;
 	}
+	//Wax & Polish discount
+	else if (tempService->getServiceType() == "Wax & Polish")
+	{
+		bool recordFound = false;
+		int serviceCount = 0;
+		double discountPercent = 0;
+
+		for (int i = 0; i < tempSizeS; i++)
+		{
+			if (tempService->getCustomer()->getID().compare(pServices[i].getCustomer()->getID()) == 0)
+			{
+				if (pServices[i].getServiceType().compare("Wax & Polish") == 0)
+				{
+					serviceCount++;
+					recordFound = true;
+				}
+			}
+
+		}
+
+		if (recordFound)
+		{
+			cout << endl;
+			cout << "Number of Service for Wax & Polish : " << serviceCount << endl;
+			serviceCount = serviceCount % 10;
+
+			if (serviceCount >= 5 && serviceCount <= 7)
+			{
+				discountPercent = 0.10;
+			}
+			else if (serviceCount >= 8 && serviceCount <= 9)
+			{
+				discountPercent = 0.30;
+			}
+			else if (serviceCount == 0)
+			{
+				discountPercent = 1.00;
+			}
+
+			
+			cout << "Customer Mr."<< tempService->getCustomer()->getLastName() <<" is entitled to " << discountPercent * 100 << "% discount in Wax & Polish" << endl;
+		}
+
+		tempService->setPrice(tempService->getPrice() - (tempService->getPrice() * discountPercent));
+
+	}
 
 	tempAppoint->setServices(tempService);
 
@@ -623,6 +669,11 @@ No. of Service   Discount Rate
 
 		cout << "This customer is entitled to " << discountPercent * 100 << "% discount in Wax & Polish" << endl;
 	}
+
+}
+
+void displaySummary()
+{
 
 }
 
