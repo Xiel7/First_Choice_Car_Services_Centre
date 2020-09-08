@@ -442,19 +442,10 @@ void makeAppointment()
 	pServices = tempS;
 	
 	//set new service and appointment
-	pServices[sizeServices - 1] = *tempService;
-	pAppoint[sizeAppoint - 1] = *tempAppoint;
-	pAppoint[sizeAppoint - 1].setServices(&pServices[sizeServices - 1]);
+	pServices[sizeServices - 1] = tempService[0];
+	pAppoint[sizeAppoint - 1] = tempAppoint[0];
 
 	pAppoint[sizeAppoint - 1].printAppointment();
-
-	for (int i = 0; i < sizeAppoint; i++)
-	{
-		pAppoint[i].printAppointment();
-	}
-	cout << "Appointment done..." << endl;
-
-
 }
 
 void registerTechnician()
@@ -484,9 +475,9 @@ void registerTechnician()
 	pTech = temp;
 
 
-	pTech[sizeManager - 1] = tempTech[0];
+	pTech[sizeTechnician - 1] = tempTech[0];
 	cout << "New Technician: " << endl;
-	pTech[sizeManager - 1].printInfo();
+	pTech[sizeTechnician - 1].printInfo();
 
 }   
 
@@ -588,8 +579,9 @@ void displayAllCustomer()
   ALL CUSTOMER INFORMATION
 ------------------------------
     )===";
-	cout << screen << endl;
 	clearScreen(1000);
+	cout << screen << endl;
+	
 	
 	for (int i = 0; i < sizeCustomer; i++)
 	{
@@ -648,12 +640,11 @@ void displayAllAppointments()
 	for (int i = 0; i < sizeAppoint; i++)
 	{
 		count++;
-		/*printf("%3d   %02d/%02d/%02d           %02d%02d %20s         %10s  %10s  %12s\n",count, pAppoint[i].getDay(), pAppoint[i].getMonth(), pAppoint[i].getYear(), 
-			pAppoint[i].getStartHr(),pAppoint[i].getStartMin(),pAppoint[i].getServices()->getServiceType().c_str(), 
-			pAppoint[i].getServices()->getCustomer()->getCustomerCar().getCrNo().c_str(),
-			pAppoint[i].getServices()->getCustomer()->getID().c_str(),
-			pAppoint[i].getServices()->getTechnician()->getID().c_str());*/
-		pAppoint[i].printAppointment();
+		printf("%3d   %02d/%02d/%02d           %02d%02d %20s         %10s  %10s  %12s\n",count, pAppoint[i].getDay(), pAppoint[i].getMonth(), pAppoint[i].getYear(), 
+			pAppoint[i].getStartHr(),pAppoint[i].getStartMin(),pServices[i].getServiceType().c_str(), 
+			pServices[i].getCustomer()->getCustomerCar().getCrNo().c_str(),
+			pServices[i].getCustomer()->getID().c_str(),
+			pServices[i].getTechnician()->getID().c_str());
 	}
 }
 
@@ -674,9 +665,9 @@ void displayAllServices()
 	{
 		count++;
 		printf("%3d   %02d/%02d/%02d           %02d%02d %16s %20s         %40s       %12s\n", count, pAppoint[i].getDay(), pAppoint[i].getMonth(), pAppoint[i].getYear(),
-			pAppoint[i].getStartHr(), pAppoint[i].getStartMin(), pAppoint[i].getServices()->getTransCode().c_str(), pAppoint[i].getServices()->getServiceType().c_str(),
-			pAppoint[i].getServices()->getServicesDesc().c_str(),
-			pAppoint[i].getServices()->getTechnician()->getID().c_str());
+			pAppoint[i].getStartHr(), pAppoint[i].getStartMin(), pServices[i].getTransCode().c_str(), pServices[i].getServiceType().c_str(),
+			pServices[i].getServicesDesc().c_str(),
+			pServices[i].getTechnician()->getID().c_str());
 	}
 }
 
@@ -697,10 +688,10 @@ void displayAllCustomerTransactions()
 	{
 		count++;
 		printf("%3d   %02d/%02d/%02d           %02d%02d  %10s           %12s    %13.2f  %16s  %20s\n", count, pAppoint[i].getDay(), pAppoint[i].getMonth(), pAppoint[i].getYear(),
-			pAppoint[i].getStartHr(), pAppoint[i].getStartMin(), pAppoint[i].getServices()->getCustomer()->getID().c_str(), pAppoint[i].getServices()->getServiceType().c_str(),
-			pAppoint[i].getServices()->getPrice(),
-			pAppoint[i].getServices()->getCustomer()->getCustomerCar().getCrNo().c_str(),
-			pAppoint[i].getServices()->getCustomer()->getCustomerCar().getCrMode().c_str());
+			pAppoint[i].getStartHr(), pAppoint[i].getStartMin(), pServices[i].getCustomer()->getID().c_str(), pServices[i].getServiceType().c_str(),
+			pServices[i].getPrice(),
+			pServices[i].getCustomer()->getCustomerCar().getCrNo().c_str(),
+			pServices[i].getCustomer()->getCustomerCar().getCrMode().c_str());
 	}
 }
 
