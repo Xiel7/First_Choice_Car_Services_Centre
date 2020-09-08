@@ -25,8 +25,10 @@ void searchTechnician();
 void makeAppointment();
 void displayAllTechnician();
 void displayAllCustomer();
+void displayAllAppointments();
 void transacHistory();
 void discountPrivilege();
+
 
 int sizeManager;
 int sizeTechnician;
@@ -393,6 +395,7 @@ void makeAppointment()
 
 			
 			cout << "Customer Mr."<< tempService->getCustomer()->getLastName() <<" is entitled to " << discountPercent * 100 << "% discount in Wax & Polish" << endl;
+			cout << "Please check the discount privilege for more information..." << endl;
 		}
 
 		tempService->setPrice(tempService->getPrice() - (tempService->getPrice() * discountPercent));
@@ -602,6 +605,11 @@ void transacHistory()
 	}
 }
 
+void displayAllAppointments()
+{
+
+}
+
 void discountPrivilege()
 {
 	string custID;
@@ -674,7 +682,14 @@ No. of Service   Discount Rate
 
 void displaySummary()
 {
-
+	const char* screen = R"===(
+       SUMMARY REPORTS
+------------------------------
+1. All Appointments
+2. All Customer Transactions
+3. 
+    )===";
+	cout << screen << endl;
 }
 
 int choices(int n)
