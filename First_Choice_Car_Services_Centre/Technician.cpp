@@ -45,7 +45,6 @@ void Technician::registerTechnician(int size)
 	setFirstName(fName);
 	
 	cout << "Enter Technician's last name: ";
-	cin.ignore();
 	getline(cin, lName);
 	setLastName(lName);
 
