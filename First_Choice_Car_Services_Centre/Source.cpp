@@ -602,22 +602,22 @@ void transacHistory()
 	cout << screen << endl;
 
 	cout << "Enter the car registration number: ";
-	cin >> carRegisNum;
+	cin >> carRegisNum;//enter car regis number
 
 
 	for (int i = 0; i < sizeAppoint; i++)
 	{
 		
-		if (carRegisNum.compare(pAppoint[i].getServices()->getCustomer()->getCustomerCar().getCrNo()) == 0)
+		if (carRegisNum.compare(pAppoint[i].getServices()->getCustomer()->getCustomerCar().getCrNo()) == 0)//find the car number from the appointment array
 		{
 			count = i + 1;
 			cout << endl;
 			cout << "Transaction No." << count << endl;
 			cout << "-----------------" << endl;
-			pAppoint[i].printAppointment();
-			recordFound = true;
+			pAppoint[i].printAppointment();//print the details
+			recordFound = true;// set true
 		}
-		else if (i == sizeAppoint - 1 && !recordFound)
+		else if (i == sizeAppoint - 1 && !recordFound)//this is when the if statement never got triggered because false.
 		{
 			cout << "No record was found for this car registration number." << endl;
 		}
@@ -716,7 +716,7 @@ No. of Service   Discount Rate
 
 	cout << endl;
 	cout << "Enter the customer ID (EX: CT0001) : ";
-	cin >> custID;
+	cin >> custID;//find specific customer with ID
 
 	for (int i = 0; i < sizeCustomer; i++)
 	{
@@ -724,9 +724,10 @@ No. of Service   Discount Rate
 		{
 			for (int j = 0; j < sizeServices; j++)
 			{
-				if (pCust[i].getID().compare(pServices[j].getCustomer()->getID()) == 0)
+				if (pCust[i].getID().compare(pServices[j].getCustomer()->getID()) == 0)//if found the ID
 				{
-					if (pServices[j].getServiceType().compare("Wax & Polish") == 0)
+					if (pServices[j].getServiceType().compare("Wax & Polish") == 0) //find which customer took wax & polish, count the amount of time 
+						//the customer took the service
 					{
 						serviceCount++;
 						recordFound = true;
@@ -736,16 +737,16 @@ No. of Service   Discount Rate
 			}
 			
 		}
-		else if (i == sizeServices - 1 && !recordFound)
+		else if (i == sizeServices - 1 && !recordFound)//if not found then display this
 		{
 			cout << "No record of Wax & Polish service found for this customer ID." << endl;
 		}
 	}
 
-	if (recordFound)
+	if (recordFound)//if found 
 	{
 		cout << "Number of Service for Wax & Polish : " << serviceCount << endl;
-		serviceCount = serviceCount % 10;
+		serviceCount = serviceCount % 10; //get remainder
 
 		if (serviceCount >= 5 && serviceCount <= 7)
 		{
@@ -765,7 +766,7 @@ No. of Service   Discount Rate
 	else 
 	{
 		cout << "This customer haven't had wax and polish services" << endl;
-	}
+	}//else
 
 }
 
